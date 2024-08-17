@@ -2,7 +2,7 @@
 
 {
     services.polybar.enable = true;
-    services.polybar.script = "polybar top &";
+    services.polybar.script = "";
     services.polybar.package = pkgs.polybar.override {
         i3Support = true;
         alsaSupport = true;
@@ -84,9 +84,20 @@
             modules-right = "network";
         };
 
+        "bar/bottom2" = {
+            "inherit" = "bar/base";
+
+            monitor = "DP-3";
+            bottom = true;
+
+            modules-left = "i3";
+            modules-center = "";
+            modules-right = "";
+        };
+
         "module/i3" = {
             type = "internal/i3";
-            index-sort = true;
+            pin-workspaces = true;
 
             format = "<label-state>";
 

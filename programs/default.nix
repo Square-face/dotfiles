@@ -15,8 +15,19 @@
         gcc
         grc
 
+        direnv
         eza
         bat
+        htop
+        gh
+        fastfetch
+        ripgrep
+
+        feh
+        mpv
+        file
+
+        flameshot
     ];
 
 }

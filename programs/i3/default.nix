@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
     imports = [
@@ -9,7 +9,7 @@
         enable = true;
         package = pkgs.i3-gaps;
         config = {
-            defaultWorkspace = "workspace 1 output HDMI -1\n workspace 2 output DP-3";
+            defaultWorkspace = "workspace 2 output \"DP-3\"";
             modifier = "Mod4";
             terminal = "kitty";
             gaps = {
@@ -44,11 +44,19 @@
             bars = [
                 {command = "polybar top &";}
                 {command = "polybar bottom &";}
+                {command = "polybar bottom2 &";}
             ];
 
             startup = [
                 {command = "autorandr -c";}
+                {command = "feh ~/.config/home-manager/assets/city.png";}
             ];
+
+            keybindings = let
+                mod = "Mod4";
+            in lib.mkOptionDefault {
+                "${mod}+Shift+S" = "exec flameshot gui";
+            };
         };
     };
 }

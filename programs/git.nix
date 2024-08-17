@@ -12,10 +12,10 @@
                 editor = "nvim";
             };
             "credential \"https://github.com\"" = {
-                helper = "!/run/current-system/sw/bin/gh auth git-credential";
+                helper = "!/${pkgs.gh}/bin/gh auth git-credential";
             };
             "credential \"https://gist.github.com\"" = {
-                helper = "!/run/current-system/sw/bin/gh auth git-credential";
+                helper = "!/${pkgs.gh}/bin/gh auth git-credential";
             };
         };
     };
