@@ -6,7 +6,7 @@
         extraConfig = {
             user = {
                 name = "Square-face";
-                email = "linus.michelsson@gmail.com";
+                email = "sq8.square.face@gmail.com";
             };
             core = {
                 editor = "nvim";
