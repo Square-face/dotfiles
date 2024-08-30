@@ -23,6 +23,11 @@
         fastfetch
         ripgrep
 
+        pwninit
+        pwndbg
+        patchelf
+        ghidra
+
         feh
         mpv
         file
