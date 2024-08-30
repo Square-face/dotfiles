@@ -93,6 +93,26 @@
         vi  = "nvim";
         vim = "nvim";
 
+        # git shortcuts
+        gs  = "git status";
+        gd  = "git diff";
+        gpl = "git pull";
+        gpu = "git push";
+
+        gl  = "git log";
+        glg = "git log --graph --oneline --all";
+
+        gc  = "git commit";
+        gca = "git commit --amend --no-edit"; # amend to previous commit without launching an editor to edit the commit message
+        gce = "git commit --amend"; # amend to previous commit and allow the commit message to be edited
+
+        ga  = "git add";
+        gaa = "git add .";
+        gai = "git add -i ";
+
+        gr  = "git rebase";
+        gri = "git rebase -i";
+
         # Tell bios to select windows for the next boot
         # Reboot
         winboot = "nix-shell -p efibootmgr --run 'sudo efibootmgr -n 1'; reboot";
