@@ -5,7 +5,6 @@
         enable = true;
 
         plugins = [ # Fish plugins
-            { name = "grc"; src = pkgs.fishPlugins.grc.src; }
             { name = "sponge"; src = pkgs.fishPlugins.sponge.src; }
             { name = "autopair"; src = pkgs.fishPlugins.autopair.src; }
         ];
