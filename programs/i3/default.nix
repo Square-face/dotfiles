@@ -48,8 +48,7 @@
             ];
 
             startup = [
-                {command = "autorandr -c";}
-                {command = "feh ~/.config/home-manager/assets/city.png";}
+                {command = "autorandr -c; sh ~/.fehbg";}
             ];
 
             keybindings = let
