@@ -93,9 +93,15 @@
         vi  = "nvim";
         vim = "nvim";
 
+        # Tmux shortcuts
+        t   = "tmux";
+        ta  = "tmux attach";
+
         # git shortcuts
+        g   = "git";
         gs  = "git status";
         gd  = "git diff";
+        gdc = "git diff --cached";
         gpl = "git pull";
         gpu = "git push";
 
@@ -103,8 +109,14 @@
         glg = "git log --graph --oneline --all";
 
         gc  = "git commit";
+        gcm = "git commit -m";
         gca = "git commit --amend --no-edit"; # amend to previous commit without launching an editor to edit the commit message
         gce = "git commit --amend"; # amend to previous commit and allow the commit message to be edited
+
+        gC  = "git checkout";
+        gCb = "git checkout -b";
+
+        gb  = "git branch";
 
         ga  = "git add";
         gaa = "git add .";
