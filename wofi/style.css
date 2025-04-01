@@ -1,0 +1,54 @@
+/* ::root{ */
+/*     --accent: #5291e2; */
+/*     --dark:   #383C4A; */
+/*     --light:  #7C818C; */
+/*     --ld:     #404552; */
+/*     --dl:     #4B5162 */
+/*     --white:  white; */
+/* } */
+
+*{
+  font-family: monospace;
+  font-size: 1em;
+  color: #cdd6f4;
+}
+
+window{
+  background-color: #11111b;
+  border-radius: 2em;
+}
+
+#input {
+  background-color: #11111b;
+  border-radius: 2em;
+  margin: 5px;
+  border: none;
+  color: white;
+  font-size: 2em;
+}
+
+#inner-box {
+  background-color: #181825;
+}
+
+#outer-box {
+  margin: 2px;
+  padding:0px;
+  background-color: #11111b;
+}
+
+#text {
+  padding: 5px;
+}
+
+#entry:selected {
+  background-color: #585b70;
+}
+
+#text:selected {
+}
+
+/* Give color to even items */
+/* #entry:nth-child(even){ */
+/*     background-color: #404552; */
+/* } */
