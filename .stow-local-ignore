@@ -1,4 +1,10 @@
+# git files
+.gitignore
+.git
+
+# Stow scripts
 stw.sh
 unstw.sh
-.git
+
+# Asset files
 assets
