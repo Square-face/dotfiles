@@ -1,13 +1,11 @@
+[include]
+    path = ./private.config
 [credential "https://github.com"]
 	helper = 
 	helper = !/usr/bin/gh auth git-credential
 [credential "https://gist.github.com"]
 	helper = 
 	helper = !/usr/bin/gh auth git-credential
-[user]
-	email = linus@sq8.dev
-	name = SQ8
-	signingkey = 358A91ED04E8778A
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
