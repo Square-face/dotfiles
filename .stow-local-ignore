@@ -8,3 +8,4 @@ unstw.sh
 
 # Asset files
 assets
+.DS_Store
