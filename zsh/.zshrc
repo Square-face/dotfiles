@@ -74,6 +74,9 @@ export XDG_SESSION_TYPE=wayland
 export XDG_CURRENT_DESKTOP=sway
 export _JAVA_AWT_WM_NONREPARENTING=1
 
+GPG_TTY=$(tty)
+export GPG_TTY
+
 # hooks
 eval "$(starship init zsh)"
 eval "$(direnv hook zsh)"
