@@ -1,86 +1,44 @@
 {
     "layer": "top",
     "reload_style_on_change": true,
-    "modules-left": ["custom/icon", "sway/workspaces", "sway/mode"],
-    "modules-center": ["sway/window"],
-    "modules-right": ["group/hardware", "group/clocktray", "group/group-power"],
+    "modules-left": [ "group/group-power", "sway/workspaces", "sway/mode"],
+    "modules-center": [ "group/clocktray"],
+    "modules-right": ["group/hardware", "group/status"],
 
-    "sway/window": {
-        "max-length": 50
+    "group/status": {
+        "orientation": "inherit",
+        "modules": [ "pulseaudio", "power-profiles-daemon", "tray" ]
     },
 
-    "clock": {
-        "format-alt": "{:%a, %d. %b  %H:%M}",
-        "tooltip-format": "<tt><small>{calendar}</small></tt>",
-        "calendar": {
-            "mode"          : "month",
-            "mode-mon-col"  : 3,
-            "weeks-pos"     : "right",
-            "on-scroll"     : 1,
-            "format": {
-                "months":     "<span color='#ffead3'><b>{}</b></span>",
-                "days":       "<span color='#ecc6d9'><b>{}</b></span>",
-                "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
-                "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
-                "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
-            }
+    "group/hardware": {
+        "orientation": "inherit",
+        "modules": [ "memory", "cpu" ]
+    },
+
+    "group/clocktray": {
+        "orientation": "inherit",
+        "modules": ["clock"]
+    },
+
+    "group/group-power": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 500,
+            "children-class": "not-power",
+            "transition-left-to-right": true,
+            "click-to-reveal": true
         },
-        "actions":  {
-            "on-click-right": "mode",
-            "on-scroll-up": "tz_up",
-            "on-scroll-down": "tz_down",
-            "on-scroll-up": "shift_up",
-            "on-scroll-down": "shift_down"
-        }
-    },
-
-    "cpu": {
-        "interval": 1,
-        "format": "{icon}",
-        "format-icons": [
-            "<span color='#69ff94'>󰍛</span>", // green
-            "<span color='#2aa9ff'>󰍛</span>", // blue
-            "<span color='#f8f8f2'>󰍛</span>", // white
-            "<span color='#f8f8f2'>󰍛</span>", // white
-            "<span color='#ffffa5'>󰍛</span>", // yellow
-            "<span color='#ffffa5'>󰍛</span>", // yellow
-            "<span color='#ff9977'>󰍛</span>", // orange
-            "<span color='#dd532e'>󰍛</span>"  // red
+        "modules": [
+            "custom/icon",
+            "custom/power",
+            "custom/quit",
+            "custom/lock",
+            "custom/reboot"
         ]
     },
 
-    "memory": {
-        "interval": 1,
-        "format": "",
-        "tooltip-format": "MEM: {used}/{total}GiB {percentage}%\nSWP: {swapUsed}/{swapTotal}GiB {swapPercentage}%",
-        "max-length": 10
-    },
-
-    "pulseaudio": {
-        "format": "{icon}",
-        "format-bluetooth": "{icon}",
-        "format-muted": "",
-        "format-icons": {
-            "headphone": "",
-            "headset": "󰋎",
-            "default": ["", ""]
-        },
-        "tooltip-format": "{icon} {desc}: {volume}%",
-        "scroll-step": 5,
-        "on-click": "pavucontrol",
-        "ignored-sinks": ["Easy Effects Sink"]
-    },
-
-    "power-profiles-daemon": {
-        "format": "{icon}",
-        "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
-        "tooltip": true,
-        "format-icons": {
-            "default": "",
-            "performance": "",
-            "balanced": "",
-            "power-saver": ""
-        }
+    "sway/window": {
+        "max-length": 50
     },
 
     "sway/workspaces": {
@@ -106,30 +64,88 @@
         "max-length": 50
     },
 
-    "group/hardware": {
-        "orientation": "inherit",
-        "modules": [ "pulseaudio", "memory", "cpu", "power-profiles-daemon" ]
+    "tray": {
+        "spacing": 4
     },
 
-    "group/clocktray": {
-        "orientation": "inherit",
-        "modules": ["tray", "clock"]
-    },
-
-    "group/group-power": {
-        "orientation": "inherit",
-        "drawer": {
-            "transition-duration": 500,
-            "children-class": "not-power",
-            "transition-left-to-right": false,
-        },
-        "modules": [
-            "custom/power", // First element is the "group leader" and won't ever be hidden
-            "custom/quit",
-            "custom/lock",
-            "custom/reboot"
+    "cpu": {
+        "interval": 1,
+        "format": "{icon} {usage}%",
+        "format-icons": [
+            "<span color='#f8f8f2'>󰍛</span>", // white
+            "<span color='#69ff94'>󰍛</span>", // green
+            "<span color='#69ff94'>󰍛</span>", // green
+            "<span color='#2aa9ff'>󰍛</span>", // blue
+            "<span color='#2aa9ff'>󰍛</span>", // blue
+            "<span color='#ffffa5'>󰍛</span>", // yellow
+            "<span color='#ffffa5'>󰍛</span>", // yellow
+            "<span color='#ff9977'>󰍛</span>", // orange
+            "<span color='#dd532e'>󰍛</span>"  // red
         ]
     },
+
+    "memory": {
+        "interval": 1,
+        "format": " {percentage}%",
+        "tooltip-format": "MEM: {used}/{total}GiB {percentage}%\nSWP: {swapUsed}/{swapTotal}GiB {swapPercentage}%"
+    },
+
+
+    "clock": {
+        "interval": 1,
+        "locale": "en_GB.UTF-8",
+        "format": " {:%H:%M}",
+        "format-alt": " {:L%A, %B %d, %Y (%H:%M:%S)}",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "mode"          : "year",
+            "mode-mon-col"  : 3,
+            "weeks-pos"     : "right",
+            "on-scroll"     : 1,
+            "format": {
+                "months":     "<span color='#ffead3'><b>{}</b></span>",
+                "days":       "<span color='#ecc6d9'><b>{}</b></span>",
+                "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+                "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
+                "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+            }
+        },
+        "actions":  {
+            "on-click-right": "mode",
+            "on-scroll-up": "tz_up",
+            "on-scroll-down": "tz_down",
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
+        }
+    },
+
+    "pulseaudio": {
+        "format": "{icon}",
+        "format-bluetooth": "{icon}",
+        "format-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "headset": "󰋎",
+            "default": ["", ""]
+        },
+        "tooltip-format": "{icon} {desc}: {volume}%",
+        "scroll-step": 5,
+        "on-click": "pavucontrol",
+        "ignored-sinks": ["Easy Effects Sink"]
+    },
+
+    "power-profiles-daemon": {
+        "format": "{icon}",
+        "tooltip-format": "Profile: {profile}\nDriver: {driver}",
+        "tooltip": true,
+        "format-icons": {
+            "default": "",
+            "performance": "",
+            "balanced": "󰗑",
+            "power-saver": ""
+        }
+    },
+
 
     "custom/icon": {
         "format": ""
@@ -144,7 +160,7 @@
     "custom/lock": {
         "format": "󰍁",
         "tooltip-format": "Lock",
-        "on-click": "$XDG_CONFIG_HOME/sway/lock.sh"
+        "on-click": "$XDG_CONFIG_HOME/waybar/lock.sh"
     },
 
     "custom/reboot": {
@@ -157,5 +173,9 @@
         "format": "",
         "tooltip-format": "Shutdown",
         "on-click": "shutdown now"
+    },
+
+    "custom/divider": {
+        "format": "|"
     }
 }
