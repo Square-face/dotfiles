@@ -42,6 +42,8 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 
+alias tmpcd='cd $(mktemp -d)'
+
 alias pwninit='pwninit --template-path ~/.config/pwninit/template.py'
 alias disass='objdump -M intel -d'
 alias gettext='objcopy --dump-section .text=payload.text'
