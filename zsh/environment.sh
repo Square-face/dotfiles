@@ -17,12 +17,17 @@ export PYTHON_HISTORY="$XDG_STATE_HOME/python/history"
 export PYENV_ROOT="$XDG_STATE_HOME/python/env"
 export CARGO_HOME=$XDG_DATA_HOME/cargo
 export GOPATH=$XDG_DATA_HOME/go
+export HISTFILE=$XDG_CACHE_HOME/zsh/history
 
 ## Path
-export PATH="$PYENV_ROOT/bin:$PATH"
-export PATH="$PATH:$GOPATH/bin"
-export PATH="$PATH:$HOME/.cargo/bin"
-export PATH="$PATH:$HOME/.config/lf/bin"
+FPATH="$HOME/.docker/completions:$FPATH"
+
+export PATH=$PYENV_ROOT/bin:$PATH
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$CARGO_HOME/bin
+export PATH=$PATH:/opt/homebrew/bin
+export PATH=$PATH:$XDG_DATA_HOME/bob/nvim-bin
 
 ## Other
 export _JAVA_AWT_WM_NONREPARENTING=1
+

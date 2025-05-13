@@ -8,7 +8,11 @@ source $ZDOTDIR/environment.sh
 # hooks
 eval "$(starship init zsh)"
 eval "$(direnv hook zsh)"
-eval "$(pyenv init - zsh)"
+
+# GPG
+export GPG_TTY="$(tty)"
+export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+gpgconf --launch gpg-agent
 
 # shell completions
 autoload -Uz compinit && compinit
