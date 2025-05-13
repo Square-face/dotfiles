@@ -17,7 +17,7 @@
 
     "group/clocktray": {
         "orientation": "inherit",
-        "modules": ["clock"]
+        "modules": ["clock", "image#album-art", "mpris"]
     },
 
     "group/group-power": {
@@ -65,7 +65,7 @@
     },
 
     "tray": {
-        "spacing": 4
+        "spacing": 5
     },
 
     "cpu": {
@@ -146,6 +146,17 @@
         }
     },
 
+    "image#album-art": {
+         "exec":"$XDG_CONFIG_HOME/waybar/custom/spotify/album_art.sh",
+         "size": 15,
+         "interval": 1
+    },
+
+    "custom/song": {
+         "exec":"$XDG_CONFIG_HOME/waybar/custom/spotify/song_info.sh",
+         "interval": 1
+    },
+
 
     "custom/icon": {
         "format": ""
@@ -174,8 +185,4 @@
         "tooltip-format": "Shutdown",
         "on-click": "shutdown now"
     },
-
-    "custom/divider": {
-        "format": "|"
-    }
 }
