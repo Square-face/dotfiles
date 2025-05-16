@@ -14,14 +14,11 @@ gpg-connect-agent updatestartuptty /bye > /dev/null
 # hooks
 eval "$(starship init zsh)"
 eval "$(direnv hook zsh)"
-<<<<<<< HEAD
 
 # GPG
 export GPG_TTY="$(tty)"
 export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
 gpgconf --launch gpg-agent
-=======
->>>>>>> 91db7558b0cd34c45fbdfcf4272d3259963a8138
 
 # shell completions
 autoload -Uz compinit && compinit
