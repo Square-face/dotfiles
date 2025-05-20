@@ -1,0 +1,1 @@
+stow --target=$XDG_CONFIG_HOME --delete .

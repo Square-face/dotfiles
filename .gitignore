@@ -1,1 +1,4 @@
-/result
+.zcompdump
+private.config
+.DS_Store
+tmux/plugins

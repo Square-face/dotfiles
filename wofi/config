@@ -1,0 +1,11 @@
+show=drun
+term = kitty
+lines = 8
+eh = 2
+width=1000
+allow_images=true
+prompt=Search
+insensitive = true
+single_click = true
+matching = multi-contains
+key_expand = Tab
