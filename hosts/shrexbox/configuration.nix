@@ -2,25 +2,33 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
-    nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # Bootloader.
   boot.loader.timeout = 10;
   boot.loader.grub = {
-      enable = true;
-      useOSProber = true;
-      memtest86.enable = true;
-      efiSupport = true;
-      # efiInstallAsRemovable = true;
-      device = "nodev";
+    enable = true;
+    useOSProber = true;
+    memtest86.enable = true;
+    efiSupport = true;
+    # efiInstallAsRemovable = true;
+    device = "nodev";
   };
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -35,7 +43,7 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-  services.xserver.videoDrivers = ["amdgpu"];
+  services.xserver.videoDrivers = [ "amdgpu" ];
   services.xserver.displayManager.startx.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
@@ -43,8 +51,8 @@
 
   # Zerotier
   services.zerotierone.enable = true;
-  services.zerotierone.joinNetworks = ["272f5eae163890e5"];
-  
+  services.zerotierone.joinNetworks = [ "272f5eae163890e5" ];
+
   xdg.portal = {
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
@@ -52,7 +60,7 @@
 
   security.rtkit.enable = true;
   security.polkit.enable = true;
-  
+
   # Sound
   services.pulseaudio.enable = false;
   services.pipewire = {
@@ -74,35 +82,45 @@
     isNormalUser = true;
     shell = pkgs.zsh;
     description = "Linus Michelsson";
-    extraGroups = [ "networkmanager" "seat" "video" "audio" "libvirtd" "kvm"
-    "wheel" ];
-    packages = with pkgs; [];
+    extraGroups = [
+      "networkmanager"
+      "seat"
+      "video"
+      "audio"
+      "libvirtd"
+      "kvm"
+      "wheel"
+    ];
+    packages = with pkgs; [ ];
   };
-
 
   programs.zsh.enable = true;
 
   # Virtualization
   virtualisation.docker.enable = true;
   virtualisation.libvirtd = {
-   enable = true;
-   qemu = {
-     package = pkgs.qemu_kvm;
-     runAsRoot = true;
-     swtpm.enable = true;
-     ovmf = {
-       enable = true;
-       packages = [(pkgs.OVMF.override {
-         secureBoot = true;
-         tpmSupport = true;
-       }).fd];
-     };
-   };
+    enable = true;
+    qemu = {
+      package = pkgs.qemu_kvm;
+      runAsRoot = true;
+      swtpm.enable = true;
+      ovmf = {
+        enable = true;
+        packages = [
+          (pkgs.OVMF.override {
+            secureBoot = true;
+            tpmSupport = true;
+          }).fd
+        ];
+      };
+    };
   };
-
 
   # Global packages
   environment.systemPackages = with pkgs; [
+    uutils-coreutils-noprefix
+    psmisc
+
     neovim
     # sway
     wayland
@@ -110,10 +128,12 @@
   ];
 
   # Allow certain unfree packages
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "zerotierone"
-             "spotify"
-  ];
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
+    builtins.elem (lib.getName pkg) [
+      "zerotierone"
+      "spotify"
+    ];
 
   # Networking
   networking.hostName = "crynix";
@@ -122,11 +142,11 @@
   networking.useDHCP = false;
   networking.interfaces.enp14s0.useDHCP = true;
   networking.hosts = {
-    "192.168.196.173" = ["aapo"];
-    "192.168.196.53" = ["john"];
-    "192.168.196.157" = ["frank"];
-    "192.168.196.21" = ["entry"];
-    "192.168.196.162" = ["shitbox"];
+    "192.168.196.173" = [ "aapo" ];
+    "192.168.196.53" = [ "john" ];
+    "192.168.196.157" = [ "frank" ];
+    "192.168.196.21" = [ "entry" ];
+    "192.168.196.162" = [ "shitbox" ];
   };
 
   # Enable SSH
