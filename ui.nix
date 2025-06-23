@@ -31,16 +31,6 @@
         };
         };
     };
-      
-    # catppuccin.flavor = "mocha";
-    # catppuccin.sway.enable = true;
-    # catppuccin.gtk = {
-    #     enable = true;
-    #     flavor = "mocha";
-    #     accent = "sapphire";
-    #     size = "standard";
-    #     tweaks = [ "normal" ];
-    # };
 
     gtk = {
         enable = true;
@@ -93,18 +83,22 @@
 
     wayland.windowManager.sway = {
         enable = true;
-        config = rec {
+        config = {
             modifier = "Mod4";
             menu = "${pkgs.wofi}/bin/wofi --show drun";
             terminal = "kitty"; 
             startup = [
-                {command = "kitty";}
+                {command = "waypaper --restore";}
+                {command = "element-desktop";}
+                {command = "vesktop";}
+                {command = "spotify";}
+                {command = "firefox";}
             ];
             bars = [
                 {command = "waybar";}
             ];
             keybindings = let
-            modifier = config.wayland.windowManager.sway.config.modifier;
+                modifier = config.wayland.windowManager.sway.config.modifier;
             in lib.mkOptionDefault {
                 "${modifier}+shift+s" = "exec grim -g \"\$(slurp -d)\" -t png - | wl-copy -t image/png";
             };
@@ -113,9 +107,17 @@
                 {output = "HDMI-A-1"; workspace = "2";}
                 {output = "HDMI-A-1"; workspace = "3";}
 
-                {output = "DP-2"; workspace = "0";}
+                {output = "DP-2"; workspace = "10";}
                 {output = "DP-2"; workspace = "9";}
             ];
+            assigns = {
+                "2" = [{ app_id = "firefox"; }];
+                "10" = [
+                    { class = "Spotify"; }
+                    { class = "vesktop"; }
+                    { class = "Element"; }
+                ];
+            };
             defaultWorkspace = "1";
             window.titlebar = false;
             gaps = {
