@@ -17,7 +17,7 @@
 
     "group/clocktray": {
         "orientation": "inherit",
-        "modules": ["clock", "image#album-art", "mpris"]
+        "modules": ["clock" ]
     },
 
     "group/group-power": {
@@ -145,18 +145,6 @@
             "power-saver": ""
         }
     },
-
-    "image#album-art": {
-         "exec":"$XDG_CONFIG_HOME/waybar/custom/spotify/album_art.sh",
-         "size": 15,
-         "interval": 1
-    },
-
-    "custom/song": {
-         "exec":"$XDG_CONFIG_HOME/waybar/custom/spotify/song_info.sh",
-         "interval": 1
-    },
-
 
     "custom/icon": {
         "format": "󱄅"
