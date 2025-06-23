@@ -21,6 +21,7 @@ in
         vesktop
         firefox
         thunderbird
+        playerctl
 
         # LSPs
         nil

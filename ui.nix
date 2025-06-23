@@ -160,6 +160,9 @@
         in
         lib.mkOptionDefault {
           "${modifier}+shift+s" = "exec grim -g \"\$(slurp -d)\" -t png - | wl-copy -t image/png";
+          "XF86AudioNext" = "exec playerctl next";
+          "XF86AudioPrev" = "exec playerctl previous";
+          "XF86AudioPlay" = "exec playerctl play-pause";
         };
       workspaceOutputAssign = [
         {
