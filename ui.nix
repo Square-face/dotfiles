@@ -6,10 +6,6 @@
 }:
 
 {
-  imports = [
-    <catppuccin/modules/home-manager>
-  ];
-
   home.packages = with pkgs; [
     hellwal
     waypaper
