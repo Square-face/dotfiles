@@ -1,18 +1,10 @@
 { ... }:
 {
   imports = [
-    ./git.nix
     ./tmux.nix
     ./gpg.nix
     ./zsh.nix
   ];
-
-  programs.neovim = {
-    enable = true;
-    viAlias = true;
-    vimAlias = true;
-    defaultEditor = true;
-  };
 
   programs.eza = {
     enable = true;

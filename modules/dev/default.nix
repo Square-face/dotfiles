@@ -1,7 +1,7 @@
 { ... }:
 {
   imports = [
-    ./shell
-    ./dev
+    ./git.nix
+    ./neovim.nix
   ];
 }
