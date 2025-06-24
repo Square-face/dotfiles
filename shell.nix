@@ -21,6 +21,7 @@
   };
 
   programs.starship.enable = true;
+  programs.gh.enable = true;
 
   programs.neovim = {
     enable = true;
