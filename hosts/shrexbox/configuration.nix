@@ -5,7 +5,6 @@
 {
   config,
   pkgs,
-  lib,
   ...
 }:
 
@@ -13,6 +12,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ../shared.nix
   ];
 
   nix.settings.experimental-features = [
@@ -48,10 +48,6 @@
   services.xserver.desktopManager.gnome.enable = true;
 
   programs.nix-ld.enable = true;
-
-  # Zerotier
-  services.zerotierone.enable = true;
-  services.zerotierone.joinNetworks = [ "272f5eae163890e5" ];
 
   xdg.portal = {
     enable = true;
@@ -91,7 +87,6 @@
       "kvm"
       "wheel"
     ];
-    packages = with pkgs; [ ];
   };
 
   programs.zsh.enable = true;
@@ -126,14 +121,6 @@
     wayland
     xwayland
   ];
-
-  # Allow certain unfree packages
-  nixpkgs.config.allowUnfreePredicate =
-    pkg:
-    builtins.elem (lib.getName pkg) [
-      "zerotierone"
-      "spotify"
-    ];
 
   # Networking
   networking.hostName = "crynix";

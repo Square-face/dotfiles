@@ -1,19 +1,29 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  lib,
+  ...
+}:
 
 let
-  # Assuming home.nix and starship.toml are in the same directory
+  username = "sq8";
+
+  # Get home.nix directory
   hmDir = builtins.toString ./.;
 in
 {
-  imports =
-    if builtins.pathExists ./secrets.nix then
-      [
-        ./shell.nix
-        ./ui.nix
-        ./secrets.nix
-      ]
-    else
-      throw "secrets.nix is missing. Please read the README on how to create it";
+  home.username = username;
+  home.homeDirectory = "/home/${username}";
+
+  imports = [
+    ./modules
+    ./ui.nix
+  ];
+
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
+    builtins.elem (lib.getName pkg) [
+      "spotify"
+    ];
 
   home.packages = with pkgs; [
     # Desktop Apps
