@@ -60,8 +60,12 @@ in
 
     imports = [
       ./home.nix
+      ../modules/shell/gpg.nix
+      ../modules/shell/eza.nix
+      ../modules/shell/zsh.nix
+      ../modules/shell/tmux.nix
+      ../modules/shell/xdg.nix
       ../modules/dev
-      ../modules/shell
       ../ui.nix
     ];
 
