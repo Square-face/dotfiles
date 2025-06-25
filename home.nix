@@ -51,6 +51,10 @@ in
     playerctl
     spotifywm # spotify with proper window manager support
 
+    # Password Manager
+    bitwarden
+    bitwarden-cli
+
     # LSPs
     nil
 
