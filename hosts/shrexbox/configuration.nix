@@ -15,11 +15,6 @@
     ../shared.nix
   ];
 
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
-
   # Bootloader.
   boot.loader.timeout = 10;
   boot.loader.grub = {

@@ -14,12 +14,6 @@
     shellAliases = {
       v = "${pkgs.neovim}/bin/nvim";
 
-      # ls = "eza";
-      # la = "eza -a";
-      # ll = "eza -l";
-      # lt = "eza -T";
-      # l = "eza -la";
-
       g = "git";
 
       wget = "wget --hsts-file=\"\$XDG_CACHE_HOME/wget-hsts\"";
