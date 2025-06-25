@@ -1,18 +1,12 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{
-  config,
-  pkgs,
-  ...
-}:
+{ pkgs, ... }:
 
 {
   imports = [
+    # Load linux profile
+    ../../profiles/linux.nix
+
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ../shared.nix
   ];
 
   # Bootloader.
@@ -29,9 +23,6 @@
 
   # Clear tmp on boot
   boot.tmp.cleanOnBoot = true;
-
-  # Smart card daemon
-  services.pcscd.enable = true;
 
   # Desktop Environment.
   programs.sway.enable = true;
@@ -69,23 +60,6 @@
     #media-session.enable = true;
   };
 
-  users.users.sq8 = {
-    isNormalUser = true;
-    shell = pkgs.zsh;
-    description = "Linus Michelsson";
-    extraGroups = [
-      "networkmanager"
-      "seat"
-      "video"
-      "audio"
-      "libvirtd"
-      "kvm"
-      "wheel"
-    ];
-  };
-
-  programs.zsh.enable = true;
-
   # Virtualization
   virtualisation.docker.enable = true;
   virtualisation.libvirtd = {
@@ -106,23 +80,14 @@
     };
   };
 
-  # Global packages
-  environment.systemPackages = with pkgs; [
-    uutils-coreutils-noprefix
-    psmisc
-
-    neovim
-    # sway
-    wayland
-    xwayland
-  ];
-
   # Networking
   networking.hostName = "crynix";
-  networking.networkmanager.enable = true;
+
   networking.firewall.enable = false;
+
   networking.useDHCP = false;
   networking.interfaces.enp14s0.useDHCP = true;
+
   networking.hosts = {
     "192.168.196.173" = [ "aapo" ];
     "192.168.196.53" = [ "john" ];
@@ -131,8 +96,8 @@
     "192.168.196.162" = [ "shitbox" ];
   };
 
-  # Enable SSH
-  services.openssh.enable = true;
+  # Zerotier
+  services.zerotierone.joinNetworks = [ "272f5eae163890e5" ];
 
   # Set your time zone.
   time.timeZone = "Europe/Stockholm";
