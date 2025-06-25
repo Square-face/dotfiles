@@ -1,12 +1,5 @@
 { pkgs, ... }:
 {
-  imports = [
-  ./eza.nix
-    ./tmux.nix
-    ./gpg.nix
-    ./zsh.nix
-  ];
-
   xdg = {
     enable = true;
     portal = {

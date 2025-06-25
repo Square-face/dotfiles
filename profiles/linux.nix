@@ -67,4 +67,8 @@ in
 
   };
 
+  # Smart card daemon
+  services.pcscd.enable = true;
+  services.zerotierone.enable = true;
+
 }

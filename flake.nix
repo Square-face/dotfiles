@@ -33,6 +33,7 @@
       mkMacOsHost =
         name: system:
         nix-darwin.lib.darwinSystem {
+          system = "${system}";
           modules = [
             ./hosts/${name}/configuration.nix
             ./profiles/mac.nix
@@ -48,6 +49,8 @@
     {
       nixosConfigurations = {
         shrexbox = mkLinuxHost "shrexbox" "x86_64-linux";
+      };
+      darwinConfigurations = {
         airhead = mkMacOsHost "airhead" "aarch64-darwin";
       };
     };

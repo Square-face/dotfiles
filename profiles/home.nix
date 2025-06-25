@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, lib, config, ... }:
 
 let
   # Get home.nix directory

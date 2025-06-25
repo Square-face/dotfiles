@@ -2,9 +2,9 @@
 
 {
 
+  nix.optimise.automatic = true;
   nix.settings = {
     use-xdg-base-directories = true;
-    auto-optimise-store = true;
     experimental-features = [
       "nix-command"
       "flakes"
@@ -23,7 +23,6 @@
 
     # Password Manager
     bitwarden
-    bitwarden-cli
 
     # Utils
     fd
@@ -44,6 +43,10 @@
     neovim
     ripgrep
     fd
+
+# fonts
+    nerd-fonts.fira-code
+
   ];
 
   # Zerotier
@@ -53,8 +56,4 @@
       "zerotierone"
         "spotify"
     ];
-  services.zerotierone.enable = true;
-
-  # Smart card daemon
-  services.pcscd.enable = true;
 }
