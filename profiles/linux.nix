@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, firefox-addons, ... }:
 
 let
   # Get home.nix directory
@@ -35,6 +35,9 @@ in
   # Enable SSH
   services.openssh.enable = true;
 
+  home-manager.extraSpecialArgs = {
+    inherit firefox-addons;
+  };
   home-manager.users.sq8 = {
     home.username = "sq8";
     home.homeDirectory = "/home/sq8";
@@ -66,6 +69,7 @@ in
       ../modules/shell/tmux.nix
       ../modules/shell/xdg.nix
       ../modules/dev
+      ../modules/applications/firefox.nix
       ../ui.nix
     ];
 

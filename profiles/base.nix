@@ -17,7 +17,6 @@
     # Desktop Apps
     kitty
     vesktop
-    firefox
     thunderbird
     element-desktop
 
