@@ -73,7 +73,7 @@ in
       ../modules/shell/tmux.nix
       ../modules/shell/xdg.nix
       ../modules/dev
-      ../modules/applications/firefox.nix
+      ../modules/graphical/firefox.nix
       ../modules/graphical/virt-manager.nix
       ../ui.nix
     ];
