@@ -14,33 +14,14 @@
 
   programs.nix-ld.enable = true;
 
-  # Virtualization
-  virtualisation.docker.enable = true;
-  virtualisation.libvirtd = {
-    enable = true;
-    qemu = {
-      package = pkgs.qemu_kvm;
-      runAsRoot = true;
-      swtpm.enable = true;
-      ovmf = {
-        enable = true;
-        packages = [
-          (pkgs.OVMF.override {
-            secureBoot = true;
-            tpmSupport = true;
-          }).fd
-        ];
-      };
-    };
-  };
-
   # Networking
   networking.hostName = "thiccpad";
 
   networking.firewall.enable = false;
 
   networking.useDHCP = false;
-  networking.interfaces.enp14s0.useDHCP = true;
+  networking.interfaces.wlp0s20f3.useDHCP = true;
+  hardware.opengl.enable = true;
 
   networking.hosts = {
     "192.168.196.53" = [ "john" ];
