@@ -39,6 +39,9 @@ in
 
   networking.networkmanager.enable = true;
 
+  # Clear tmp on boot
+  boot.tmp.cleanOnBoot = true;
+
   # Enable SSH
   services.openssh.enable = true;
 
@@ -93,6 +96,42 @@ in
       "spotify"
     ];
 
+  # Sound
+  services.pulseaudio.enable = false;
+  services.pipewire = {
+    enable = true;
+    audio.enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    jack.enable = true;
+    wireplumber.enable = true;
+  };
+
+  security.rtkit.enable = true;
+  security.polkit.enable = true;
+
   # Smart card daemon
   services.pcscd.enable = true;
+
+  # Select internationalisation properties.
+  i18n.defaultLocale = "en_GB.UTF-8";
+
+  # Set your time zone.
+  time.timeZone = "Europe/Stockholm";
+
+  i18n.extraLocaleSettings = {
+    LC_ADDRESS = "sv_SE.UTF-8";
+    LC_IDENTIFICATION = "sv_SE.UTF-8";
+    LC_MEASUREMENT = "sv_SE.UTF-8";
+    LC_MONETARY = "sv_SE.UTF-8";
+    LC_NAME = "sv_SE.UTF-8";
+    LC_NUMERIC = "sv_SE.UTF-8";
+    LC_PAPER = "sv_SE.UTF-8";
+    LC_TELEPHONE = "sv_SE.UTF-8";
+    LC_TIME = "sv_SE.UTF-8";
+  };
+
+  # Keymap
+  console.keyMap = "sv-latin1";
 }
