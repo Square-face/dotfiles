@@ -1,4 +1,9 @@
-{ pkgs, firefox-addons, ... }:
+{
+  pkgs,
+  lib,
+  firefox-addons,
+  ...
+}:
 
 let
   # Get home.nix directory
@@ -14,6 +19,12 @@ in
     wayland
     xwayland
   ];
+
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+  };
 
   users.users.sq8 = {
     isNormalUser = true;
@@ -70,13 +81,22 @@ in
       ../modules/shell/xdg.nix
       ../modules/dev
       ../modules/applications/firefox.nix
+      ../modules/graphical/virt-manager.nix
       ../ui.nix
     ];
 
   };
 
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
+    builtins.elem (lib.getName pkg) [
+      "steam"
+      "steam-original"
+      "steam-unwrapped"
+      "steam-run"
+      "spotify"
+    ];
+
   # Smart card daemon
   services.pcscd.enable = true;
-  services.zerotierone.enable = true;
-
 }

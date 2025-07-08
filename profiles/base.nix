@@ -34,6 +34,7 @@
     nmap
     dust
     fastfetch
+    k9s
 
     # === DEV ===
     # LSPs
@@ -43,16 +44,10 @@
     ripgrep
     fd
 
-# fonts
+    # fonts
     nerd-fonts.fira-code
 
+    orca-slicer
   ];
 
-  # Zerotier
-  nixpkgs.config.allowUnfreePredicate =
-    pkg:
-    builtins.elem (lib.getName pkg) [
-      "zerotierone"
-        "spotify"
-    ];
 }

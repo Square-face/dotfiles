@@ -91,13 +91,31 @@
   networking.hosts = {
     "192.168.196.173" = [ "aapo" ];
     "192.168.196.53" = [ "john" ];
-    "192.168.196.157" = [ "frank" ];
-    "192.168.196.21" = [ "entry" ];
+    "10.10.10.1" = [ "frank" ];
+    "10.10.10.2" = [ "sperm-1" ];
+    "10.10.10.3" = [
+      "entry"
+      "cluster-endpoint"
+    ];
     "192.168.196.162" = [ "shitbox" ];
   };
 
-  # Zerotier
-  services.zerotierone.joinNetworks = [ "272f5eae163890e5" ];
+  networking.wireguard.interfaces = {
+    wg0 = {
+      ips = [ "10.10.10.101/24" ];
+      privateKeyFile = "/opt/wireguard/private.key";
+
+      peers = [
+        {
+          publicKey = "J1F+7yaCc7iues5fqxT9XFxxzg1WfoiyWb0hKDhHghg=";
+          allowedIPs = [ "10.10.10.0/24" ];
+          endpoint = "193.234.117.50:41194";
+          # persistentKeepalive = 25;
+        }
+      ];
+
+    };
+  };
 
   # Set your time zone.
   time.timeZone = "Europe/Stockholm";

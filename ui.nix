@@ -24,6 +24,11 @@
     XDG_CURRENT_DESKTOP = "sway";
   };
 
+  services.flameshot = {
+    enable = true;
+    package = pkgs.flameshot.override { enableWlrSupport = true; };
+  };
+
   fonts = {
     fontconfig = {
       enable = true;
