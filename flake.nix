@@ -66,6 +66,7 @@
     {
       nixosConfigurations = {
         shrexbox = mkLinuxHost "shrexbox" "x86_64-linux";
+        thiccpad = mkLinuxHost "thiccpad" "x86_64-linux";
       };
       darwinConfigurations = {
         airhead = mkMacOsHost "airhead" "aarch64-darwin";
