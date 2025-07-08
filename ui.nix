@@ -141,16 +141,14 @@
 
   wayland.windowManager.sway = {
     enable = true;
+    # package = pkgs.swayfx;
+    xwayland = true;
     config = {
       modifier = "Mod4";
       menu = "${pkgs.wofi}/bin/wofi --show drun";
       terminal = "kitty";
       startup = [
         { command = "waypaper --restore"; }
-        { command = "element-desktop"; }
-        { command = "vesktop"; }
-        { command = "spotify"; }
-        { command = "firefox"; }
       ];
       bars = [
         { command = "waybar"; }

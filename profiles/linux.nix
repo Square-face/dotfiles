@@ -14,10 +14,6 @@ in
   environment.systemPackages = with pkgs; [
     uutils-coreutils-noprefix
     psmisc
-
-    # sway
-    wayland
-    xwayland
   ];
 
   programs.steam = {
