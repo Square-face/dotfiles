@@ -25,20 +25,19 @@
   boot.tmp.cleanOnBoot = true;
 
   # Desktop Environment.
-  programs.sway.enable = true;
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.xserver.videoDrivers = [ "amdgpu" ];
-  services.xserver.displayManager.startx.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  # services.xserver.enable = true;
+  # services.xserver.videoDrivers = [ "amdgpu" ];
+  # services.xserver.displayManager.startx.enable = true;
+  # services.xserver.desktopManager.gnome.enable = true;
 
   programs.nix-ld.enable = true;
 
-  xdg.portal = {
-    enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
-  };
+  # xdg.portal = {
+  #   enable = true;
+  #   extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
+  # };
 
   security.rtkit.enable = true;
   security.polkit.enable = true;

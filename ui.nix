@@ -18,6 +18,10 @@
     source-han-sans-japanese
     source-han-serif-japanese
     pkgs.nerd-fonts.fira-code
+
+    magnetic-catppuccin-gtk
+    papirus-icon-theme
+    bibata-cursors
   ];
 
   home.sessionVariables = {
@@ -45,26 +49,20 @@
     };
   };
 
-  gtk = {
-    enable = true;
+  home.file.".config/gtk-3.0/settings.ini".text = ''
+    [Settings]
+    gtk-theme-name=Catppuccin-GTK-Dark
+    gtk-icon-theme-name=Papirus-Dark
+    gtk-cursor-theme-name=Bibata-Modern-Classic
+    gtk-font-name=Sans 10
+  '';
 
-    gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
-
-    theme = {
-      name = "Catppuccin-GTK-Dark";
-      package = pkgs.magnetic-catppuccin-gtk;
-    };
-
-    iconTheme = {
-      name = "Papirus-Dark"; # Optional, change as desired
-      package = pkgs.papirus-icon-theme;
-    };
-
-    cursorTheme = {
-      name = "Bibata-Modern-Classic"; # Optional, change as desired
-      package = pkgs.bibata-cursors;
-    };
-  };
+  home.file.".config/gtk-4.0/settings.ini".text = ''
+    [Settings]
+    gtk-theme-name=Catppuccin-GTK-Dark
+    gtk-icon-theme-name=Papirus-Dark
+    gtk-cursor-theme-name=Bibata-Modern-Classic
+  '';
 
   programs.wofi.enable = true;
   programs.swaylock.enable = true;
