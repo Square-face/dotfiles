@@ -81,7 +81,7 @@
   };
 
   # Networking
-  networking.hostName = "crynix";
+  networking.hostName = "shrexbox";
 
   networking.firewall.enable = false;
 
