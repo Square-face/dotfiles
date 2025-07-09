@@ -4,6 +4,7 @@
 
   nix.optimise.automatic = true;
   nix.settings = {
+    trusted-users = [ "sq8" ];
     use-xdg-base-directories = true;
     experimental-features = [
       "nix-command"
