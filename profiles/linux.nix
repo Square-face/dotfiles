@@ -16,6 +16,9 @@
       isNormalUser = true;
       shell = pkgs.zsh;
       description = "Linus Michelsson";
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPP9DFLLWEmyjcIJYXrPJEgV7Mk6eLwm60bPLJstiakl linus@sq8.dev"
+      ];
       extraGroups = [
         "networkmanager"
         "seat"
