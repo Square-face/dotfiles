@@ -9,9 +9,6 @@
 
     nix-darwin.url = "github:nix-darwin/nix-darwin/master";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
-
-    firefox-addons.url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
-    firefox-addons.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -19,7 +16,6 @@
       nixpkgs,
       nix-darwin,
       home-manager,
-      firefox-addons,
       ...
     }:
     let
@@ -30,18 +26,14 @@
 
           modules = [
             ./hosts/${name}/configuration.nix
-            ./profiles/linux.nix
 
             home-manager.nixosModules.home-manager
             {
               nixpkgs.hostPlatform = system;
             }
           ];
-
-          specialArgs = {
-            inherit firefox-addons;
-          };
         };
+
       mkMacOsHost =
         name: system:
         nix-darwin.lib.darwinSystem {
@@ -49,7 +41,6 @@
 
           modules = [
             ./hosts/${name}/configuration.nix
-            ./profiles/mac.nix
 
             home-manager.darwinModules.home-manager
 
@@ -57,10 +48,6 @@
               nixpkgs.hostPlatform = system;
             }
           ];
-
-          specialArgs = {
-            inherit firefox-addons;
-          };
         };
     in
     {

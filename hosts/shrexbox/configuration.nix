@@ -1,78 +1,46 @@
-{ pkgs, ... }:
+{ ... }:
 
 {
   imports = [
     # Load linux profile
+    ../../profiles/base.nix
     ../../profiles/linux.nix
 
     # Load NixOs modules
     ../../modules/bootloader/grub.nix
+    ../../modules/machines.nix
+
+    ## services
+    ../../modules/services/ssh.nix
+    ../../modules/services/wireguard.nix
+
+    ## Virtualization
     ../../modules/virtualization/libvrt.nix
     ../../modules/virtualization/docker.nix
+
+    ## Programs
+    ../../modules/graphical/obs.nix
+    ../../modules/graphical/steam.nix
 
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
 
-  programs.nix-ld.enable = true;
-
-  # Networking
-  networking.hostName = "shrexbox";
-
-  networking.firewall.enable = false;
-
-  networking.useDHCP = false;
-  networking.interfaces.enp14s0.useDHCP = true;
-
-  networking.hosts = {
-    "192.168.196.53" = [ "john" ];
-    "10.10.10.1" = [ "frank" ];
-    "10.10.10.2" = [ "sperm-1" ];
-    "10.10.10.3" = [
-      "entry"
-      "cluster-endpoint"
-    ];
-    "192.168.196.162" = [ "shitbox" ];
-  };
-
-  networking.wireguard.interfaces = {
-    wg0 = {
-      ips = [ "10.10.10.101/24" ];
-      privateKeyFile = "/opt/wireguard/private.key";
-
-      peers = [
-        {
-          publicKey = "J1F+7yaCc7iues5fqxT9XFxxzg1WfoiyWb0hKDhHghg=";
-          allowedIPs = [ "10.10.10.0/24" ];
-          endpoint = "193.234.117.50:41194";
-        }
-      ];
+  networking = {
+    hostName = "shrexbox";
+    firewall.enable = false;
+    useDHCP = false;
+    interfaces.enp14s0.useDHCP = true;
+    hosts = {
+        "10.10.10.1" = ["cluster-endpoint"];
     };
   };
 
-  programs.steam = {
+  wg.shitcloud = {
     enable = true;
-    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+    localIP = "10.10.10.101";
   };
 
-  nix.distributedBuilds = true;
-  nix.settings.builders-use-substitutes = true;
-
-  nix.buildMachines = [
-    {
-      hostName = "192.168.1.212";
-      sshUser = "remotebuild";
-      sshKey = "/root/.ssh/remotebuild";
-      system = pkgs.stdenv.hostPlatform.system;
-      maxJobs = 44;
-      supportedFeatures = [
-        "nixos-test"
-        "big-parallel"
-        "kvm"
-      ];
-    }
-  ];
-
   system.stateVersion = "24.11"; # No Touch!
+  hardware.graphics.enable = true;
 }
