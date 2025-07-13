@@ -34,11 +34,6 @@
     WINEPREFIX = "${config.xdg.dataHome}/wineprefixes";
   };
 
-  services.flameshot = {
-    enable = true;
-    package = pkgs.flameshot.override { enableWlrSupport = true; };
-  };
-
   fonts = {
     fontconfig = {
       enable = true;
