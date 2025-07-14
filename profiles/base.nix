@@ -16,10 +16,10 @@
 
   environment.systemPackages = with pkgs; [
     # Desktop Apps
-    kitty
     vesktop
     thunderbird
     element-desktop
+    orca-slicer
 
     # Password Manager
     bitwarden
@@ -28,27 +28,25 @@
     fd
     file
     wget
-    ripgrep
-    ripgrep-all
     libqalculate
+    ripgrep
     dig
+    feh
+    mpv
     nmap
     dust
     fastfetch
-    k9s
 
     # === DEV ===
-    # LSPs
+    ## LSPs
     nil
 
+    ## Kubernetes
+    k9s
+    kubectl
+    kubernetes-helm
+
     neovim
-    ripgrep
-    fd
-
-    # fonts
-    nerd-fonts.fira-code
-
-    orca-slicer
   ];
 
 }

@@ -17,7 +17,7 @@
     source-han-sans
     source-han-sans-japanese
     source-han-serif-japanese
-    pkgs.nerd-fonts.fira-code
+    nerd-fonts.fira-code
 
     magnetic-catppuccin-gtk
     papirus-icon-theme

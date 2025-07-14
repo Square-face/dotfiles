@@ -44,6 +44,7 @@ in
     ../modules/dev/neovim.nix
     ../modules/graphical/firefox.nix
     ../modules/graphical/virt-manager.nix
+    ../modules/graphical/kitty.nix
 
     ../ui.nix
   ];
