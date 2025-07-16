@@ -15,8 +15,8 @@
     ../../modules/services/wireguard.nix
 
     ## Virtualization
-    ../../modules/virtualization/libvrt.nix
-    ../../modules/virtualization/docker.nix
+    # ../../modules/virtualization/libvrt.nix
+    # ../../modules/virtualization/docker.nix
 
     ## Programs
     ../../modules/graphical/obs.nix
