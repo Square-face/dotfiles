@@ -5,8 +5,29 @@
   ...
 }:
 
+let
+  writeScript = pkgs.writeShellScriptBin "sway-outputs" ''
+    #! /usr/bin/env bash
+    set -e
+    outputs=( $(swaymsg -t get_outputs | ${pkgs.jq}/bin/jq -r 'sort_by(.rect.x) | .[].name') )
+    primary=''${outputs[1]}
+    secondary=''${outputs[2]:-''${outputs[1]}}
+    swaymsg "
+      set \$primary \"$primary\";
+      set \$secondary \"$secondary\";
+      workspace 1 output \$primary;
+      workspace 2 output \$primary;
+      workspace 3 output \$primary;
+      workspace 9 output \$secondary;
+      workspace 10 output \$secondary;
+      workspace 1
+      "
+  '';
+in
 {
   home.packages = with pkgs; [
+    writeScript
+    jq
     hellwal
     brightnessctl
 
@@ -162,35 +183,12 @@
           "XF86AudioPrev" = "exec playerctl previous";
           "XF86AudioPlay" = "exec playerctl play-pause";
           "XF86AudioMute" = "exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
-          "XF86AudioMicMute" =  "exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
+          "XF86AudioMicMute" = "exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
           "XF86AudioRaiseVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%+";
           "XF86AudioLowerVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-";
           "XF86MonBrightnessDown" = "exec brightnessctl set 10%-";
           "XF86MonBrightnessUp" = "exec brightnessctl set 10%+";
         };
-      workspaceOutputAssign = [
-        {
-          output = "HDMI-A-1";
-          workspace = "1";
-        }
-        {
-          output = "HDMI-A-1";
-          workspace = "2";
-        }
-        {
-          output = "HDMI-A-1";
-          workspace = "3";
-        }
-
-        {
-          output = "DP-2";
-          workspace = "10";
-        }
-        {
-          output = "DP-2";
-          workspace = "9";
-        }
-      ];
       assigns = {
         "2" = [ { app_id = "firefox"; } ];
         "10" = [
@@ -208,6 +206,8 @@
       };
     };
     extraConfig = ''
+      exec_always ${writeScript}/bin/sway-outputs
+
       input * {
           xkb_layout "se"
           xkb_options ctrl:nocaps

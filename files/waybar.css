@@ -23,15 +23,8 @@ window#waybar {
 
 #clocktray, #status, #hardware {
     margin: 3px 2px 0px 5px;
-    padding: 1px 0.15em;
+    padding: 1px 0.5em;
     background: @theme_base_color;
-    border-radius: 0.75em;
-}
-
-#group-power:hover {
-    /* margin: 3px 2px 0px 5px; */
-    /* background: @theme_base_color; */
-    background: #45475a;
     border-radius: 0.75em;
 }
 
@@ -43,6 +36,27 @@ tooltip {
 
 tooltip label {
     color: white;
+}
+
+#custom-icon {
+    color: #89b4fa;
+    padding: 0 1em 0 0.5em;
+}
+
+#group-power:hover {
+    /* margin: 3px 2px 0px 5px; */
+    /* background: @theme_base_color; */
+    background: #45475a;
+    border-radius: 0.75em;
+}
+
+#custom-power, #custom-reboot, #custom-lock, #custom-quit {
+    padding: 1px 0.9em 1px 0.75em;
+    border-radius: 0.75em;
+}
+
+#custom-power:hover, #custom-reboot:hover, #custom-lock:hover, #custom-quit:hover {
+    background: #585b70;
 }
 
 #workspaces button {
@@ -64,44 +78,19 @@ tooltip label {
     border-bottom: 2px solid #f38ba8;
 }
 
-#clock {
-    margin: 0 0.4em;
+#memory, #wireplumber, #battery {
+    padding: 0 0.3em 0 0;
+}
+#backlight, #wireplumber.sink {
+    padding: 0 0.5em 0 0;
+} 
+
+#network {
+    padding: 0 0.5em 0 0;
 }
 
 #tray {
-    padding: 0 0.5em 0 0.2em;
-}
-
-#battery {
-    padding: 0 0.2em;
-}
-
-#network {
-    padding: 0 0.7em 0 0.1em;
-}
-
-#battery.charging {
-    padding: 0 0.5em;
-}
-
-#custom-icon {
-    color: #89b4fa;
-    padding: 0 1em 0 0.5em;
-}
-
-#cpu, #memory {
-    padding: 0 0.5em;
-}
-
-#wireplumber, #backlight {
-    padding: 0 0.2em;
-}
-
-#custom-power, #custom-reboot, #custom-lock, #custom-quit {
-    padding: 1px 0.9em 1px 0.75em;
-    border-radius: 0.75em;
-}
-
-#custom-power:hover, #custom-reboot:hover, #custom-lock:hover, #custom-quit:hover {
-    background: #585b70;
+    border-left: 2px solid #585b70;
+    padding: 0 0 0 0.3em;
+    margin-left: 0.2em;
 }
