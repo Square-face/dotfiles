@@ -45,6 +45,7 @@ in
     ../modules/graphical/firefox.nix
     ../modules/graphical/virt-manager.nix
     ../modules/graphical/kitty.nix
+    ../modules/graphical/waypaper.nix
 
     ../ui.nix
   ];

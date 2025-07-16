@@ -8,7 +8,6 @@
 {
   home.packages = with pkgs; [
     hellwal
-    waypaper
 
     noto-fonts
     noto-fonts-cjk-sans

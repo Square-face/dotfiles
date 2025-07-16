@@ -16,8 +16,8 @@
       "nix-command"
       "flakes"
     ];
-
   };
+
   programs.zsh.enable = true;
 
   environment.systemPackages = with pkgs; [
@@ -54,5 +54,4 @@
 
     neovim
   ];
-
 }
