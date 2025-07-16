@@ -7,7 +7,7 @@
 
     "group/status": {
         "orientation": "inherit",
-        "modules": [ "pulseaudio", "power-profiles-daemon", "tray" ]
+        "modules": [  "wireplumber#source", "wireplumber#sink", "battery", "network", "tray" ]
     },
 
     "group/hardware": {
@@ -68,25 +68,73 @@
         "spacing": 5
     },
 
+    "battery": {
+        "format": "{icon}",
+        "full-at": 80,
+        "interval": 5,
+
+        "states": { "100": 100, "90": 90, "80": 80, "70": 70, "60": 60, "50": 50, "40": 40, "30": 30, "20": 20, "10": 10, "0": 0 },
+
+        // "format-discharging-0": "󰂎",
+        // "format-discharging-10": "󰁺",
+        // "format-discharging-20": "󰁻",
+        // "format-discharging-30": "󰁼",
+        // "format-discharging-40": "󰁽",
+        // "format-discharging-50": "󰁾",
+        // "format-discharging-60": "󰁿",
+        // "format-discharging-70": "󰂀",
+        // "format-discharging-80": "󰂁",
+        // "format-discharging-90": "󰂂",
+        // "format-discharging-100": "󰁹",
+
+        "format-charging-0": "󰢟 ",
+        "format-charging-10": "󰢜 ",
+        "format-charging-20": "󰂆 ",
+        "format-charging-30": "󰂇 ",
+        "format-charging-40": "󰂈 ",
+        "format-charging-50": "󰢝 ",
+        "format-charging-60": "󰂉 ",
+        "format-charging-70": "󰢞 ",
+        "format-charging-80": "󰂊 ",
+        "format-charging-90": "󰂋 ",
+        "format-charging-100": "󰂅 ",
+
+        "format-plugged": "󰚥",
+
+
+        "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+        "tooltip-format-charging": "{timeTo}\nCharge: {capacity}%\nPower: {power}W\nHealth: {health}\nCycles: {cycles}",
+        "tooltip-format-discharging": "{timeTo}\nCharge: {capacity}%\nPower: {power}W\nHealth: {health}\nCycles: {cycles}",
+        "tooltip-format-plugged": "AC connected\nNot Charging\nCharge: {capacity}%\nPower: {power}W\nHealth: {health}\nCycles: {cycles}"
+    },
+
+    "network": {
+        "format-ethernet": "",
+        "format-wifi": "{icon}",
+        "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+        "tooltip-format-ethernet": "Ethernet ({ifname})\n{ipaddr}/{cidr}\n{bandwidthUpBytes} Up\n{bandwidthDownBytes} Down\nGateway: {gwaddr}",
+        "tooltip-format-wifi": "Wifi ({ifname})\n{essid}\n{ipaddr}/{cidr}\n{bandwidthUpBytes} Up\n{bandwidthDownBytes} Down\nGateway: {gwaddr}\nAP: {bssid}\nSignal: {signalStrength}% ({signaldBm}dBm)\nFrequency: {frequency}GHz"
+    },
+
     "cpu": {
         "interval": 1,
         "format": "{icon} {usage}%",
         "format-icons": [
-            "<span color='#f8f8f2'>󰍛</span>", // white
-            "<span color='#69ff94'>󰍛</span>", // green
-            "<span color='#69ff94'>󰍛</span>", // green
-            "<span color='#2aa9ff'>󰍛</span>", // blue
-            "<span color='#2aa9ff'>󰍛</span>", // blue
-            "<span color='#ffffa5'>󰍛</span>", // yellow
-            "<span color='#ffffa5'>󰍛</span>", // yellow
-            "<span color='#ff9977'>󰍛</span>", // orange
-            "<span color='#dd532e'>󰍛</span>"  // red
+            "<span color='#f8f8f2'></span>", // white
+            "<span color='#69ff94'></span>", // green
+            "<span color='#69ff94'></span>", // green
+            "<span color='#2aa9ff'></span>", // blue
+            "<span color='#2aa9ff'></span>", // blue
+            "<span color='#ffffa5'></span>", // yellow
+            "<span color='#ffffa5'></span>", // yellow
+            "<span color='#ff9977'></span>", // orange
+            "<span color='#dd532e'></span>"  // red
         ]
     },
 
     "memory": {
         "interval": 1,
-        "format": " {percentage}%",
+        "format": " {percentage}%",
         "tooltip-format": "MEM: {used}/{total}GiB {percentage}%\nSWP: {swapUsed}/{swapTotal}GiB {swapPercentage}%"
     },
 
@@ -119,31 +167,23 @@
         }
     },
 
-    "pulseaudio": {
+    "wireplumber#sink": {
         "format": "{icon}",
-        "format-bluetooth": "{icon}",
-        "format-muted": "",
-        "format-icons": {
-            "headphone": "",
-            "headset": "󰋎",
-            "default": ["", ""]
-        },
-        "tooltip-format": "{icon} {desc}: {volume}%",
+        "format-muted": "󰝟",
+        "format-icons": ["", "", " "],
+        "tooltip-format": "{node_name}: {volume}%",
         "scroll-step": 5,
-        "on-click": "pavucontrol",
-        "ignored-sinks": ["Easy Effects Sink"]
+        "on-click-left": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
     },
 
-    "power-profiles-daemon": {
+    "wireplumber#source": {
+        "node-type": "Audio/Source",
         "format": "{icon}",
-        "tooltip-format": "Profile: {profile}\nDriver: {driver}",
-        "tooltip": true,
-        "format-icons": {
-            "default": "",
-            "performance": "",
-            "balanced": "󰗑",
-            "power-saver": ""
-        }
+        "format-muted": "󰍭",
+        "format-icons": ["󰍬"],
+        "tooltip-format": "{node_name}: {volume}%",
+        "scroll-step": 5,
+        "on-click-left": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
     },
 
     "custom/icon": {
@@ -172,5 +212,5 @@
         "format": "",
         "tooltip-format": "Shutdown",
         "on-click": "shutdown now"
-    },
+    }
 }

@@ -1,7 +1,7 @@
 * {
     border: none;
     border-radius: 0;
-    font-family: FiraCode Mono;
+    font-family: FiraCode Nerd Font;
     font-size: 15px;
     min-height: 0;
     min-width: 0;
@@ -72,6 +72,18 @@ tooltip label {
     padding: 0 0.5em 0 0.2em;
 }
 
+#battery {
+    padding: 0 0.2em;
+}
+
+#network {
+    padding: 0 0.7em 0 0.1em;
+}
+
+#battery.charging {
+    padding: 0 0.5em;
+}
+
 #custom-icon {
     color: #89b4fa;
     padding: 0 1em 0 0.5em;
@@ -81,8 +93,8 @@ tooltip label {
     padding: 0 0.5em;
 }
 
-#pulseaudio, #power-profiles-daemon {
-    padding: 0 0.3em;
+#wireplumber {
+    padding: 0 0.2em 0 0.2em;
 }
 
 #custom-power, #custom-reboot, #custom-lock, #custom-quit {

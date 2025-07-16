@@ -32,7 +32,7 @@
     useDHCP = false;
     interfaces.enp14s0.useDHCP = true;
     hosts = {
-        "10.10.10.1" = ["cluster-endpoint"];
+      "10.10.10.1" = [ "cluster-endpoint" ];
     };
   };
 
@@ -43,4 +43,6 @@
 
   system.stateVersion = "24.11"; # No Touch!
   hardware.graphics.enable = true;
+
+  services.power-profiles-daemon.enable = true;
 }

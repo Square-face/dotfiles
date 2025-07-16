@@ -59,6 +59,7 @@
 
     security.rtkit.enable = true;
     security.polkit.enable = true;
+
     services.pcscd.enable = true;
 
     i18n = {
