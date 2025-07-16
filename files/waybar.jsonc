@@ -173,7 +173,7 @@
         "format-icons": ["", "", " "],
         "tooltip-format": "{node_name}: {volume}%",
         "scroll-step": 5,
-        "on-click-left": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
     },
 
     "wireplumber#source": {
@@ -183,7 +183,7 @@
         "format-icons": ["󰍬"],
         "tooltip-format": "{node_name}: {volume}%",
         "scroll-step": 5,
-        "on-click-left": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+        "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
     },
 
     "custom/icon": {
