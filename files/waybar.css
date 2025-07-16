@@ -93,8 +93,8 @@ tooltip label {
     padding: 0 0.5em;
 }
 
-#wireplumber {
-    padding: 0 0.2em 0 0.2em;
+#wireplumber, #backlight {
+    padding: 0 0.2em;
 }
 
 #custom-power, #custom-reboot, #custom-lock, #custom-quit {
