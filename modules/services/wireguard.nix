@@ -22,6 +22,17 @@ in
       description = "Path to the WireGuard private key file.";
       default = "/opt/wireguard/private.key";
     };
+    dns = {
+      enable = mkEnableOption "Enable Shitcloud DNS for .sht domains";
+      extraDNS = mkOption {
+        type = types.listOf types.str;
+        description = "Extra dns servers to use when not getting .sht domains";
+        default = [
+          "1.1.1.1"
+          "8.8.8.8"
+        ];
+      };
+    };
   };
 
   config = mkIf swg.enable {
@@ -29,7 +40,6 @@ in
       wg0 = {
         address = [ "${swg.localIP}/24" ];
         privateKeyFile = swg.privateKeyFile;
-        dns = [ "10.10.10.1" ];
 
         peers = [
           {
@@ -39,6 +49,22 @@ in
             persistentKeepalive = 25;
           }
         ];
+      };
+    };
+
+    networking.nameservers = mkIf swg.dns.enable [ "127.0.0.1" ];
+
+    services = mkIf swg.dns.enable {
+      resolved.enable = false;
+
+      dnsmasq = {
+        enable = true;
+        settings = {
+          server = [ "/sht/10.10.10.1" ] ++ swg.dns.extraDNS;
+          no-resolv = true;
+          log-queries = false;
+          log-facility = "/var/log/dnsmasq.log";
+        };
       };
     };
   };

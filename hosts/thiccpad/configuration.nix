@@ -39,10 +39,12 @@
   wg.shitcloud = {
     enable = true;
     localIP = "10.10.10.103";
+    dns.enable = true;
   };
 
   system.stateVersion = "24.11"; # No Touch!
   hardware.graphics.enable = true;
+  hardware.bluetooth.enable = true;
 
   services.tlp = {
     enable = true;
