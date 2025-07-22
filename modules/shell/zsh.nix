@@ -27,7 +27,12 @@
       }
     '';
     dotDir = ".config/zsh";
-    history.path = "${config.xdg.dataHome}/zsh/zsh_history";
+    history = {
+      path = "${config.xdg.dataHome}/zsh/zsh_history";
+      ignoreAllDups = true;
+
+    };
+    historySubstringSearch.enable = true;
     autocd = true;
   };
 }

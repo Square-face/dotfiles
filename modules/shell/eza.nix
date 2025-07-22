@@ -7,6 +7,7 @@
     enableZshIntegration = true;
     extraOptions = [
       "--group-directories-first"
+      "--git-ignore"
     ];
   };
 }
