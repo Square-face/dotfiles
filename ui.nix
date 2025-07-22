@@ -107,58 +107,123 @@ in
     effect-vignette=0.5:0.5
   '';
 
-  programs.wofi.enable = true;
+  programs.rofi.enable = true;
+  programs.rofi.package = pkgs.rofi-wayland;
+  programs.rofi = {
+    terminal = "${pkgs.kitty}/bin/kitty";
+    theme =
+      let
+        # Use `mkLiteral` for string-like values that should show without
+        # quotes, e.g.:
+        # {
+        #   foo = "abc"; => foo: "abc";
+        #   bar = mkLiteral "abc"; => bar: abc;
+        # };
+        inherit (config.lib.formats.rasi) mkLiteral;
+      in
+      {
+        "*" = {
+          background-color = mkLiteral "#11111b";
+          text-color = mkLiteral "#cdd6f4";
+        };
+
+        textbox-prompt-colon = {
+          margin = mkLiteral "0px 0.3000em 0.0000em 0.0000em";
+          expand = mkLiteral "false";
+          str = ":";
+          text-color = mkLiteral "inherit";
+        };
+
+        prompt = {
+          content = "shize";
+        };
+        entry = {
+          placeholder = "Search";
+        };
+
+        inputbar = {
+          children = [
+            "prompt"
+            "entry"
+            "case-indicator"
+          ];
+        };
+
+        element = {
+          orientation = "horizontal";
+          children = [
+            "element-icon"
+            "element-text"
+          ];
+        };
+        element-icon = {
+          size = mkLiteral "2em";
+        };
+        element-text = {
+          size = mkLiteral "1.5em";
+        };
+      };
+  };
+
   programs.swaylock.enable = true;
   programs.swaylock.package = pkgs.swaylock-effects;
 
-  services.swayidle = let
-  # Lock command
-  lock = "${pkgs.swaylock-effects}/bin/swaylock --daemonize";
-  # TODO: modify "display" function based on your window manager
-  # Sway
-  display = status: "swaymsg 'output * power ${status}'";
-in {
-  enable = true;
-  timeouts = [
+  services.swayidle =
+    let
+      # Lock command
+      lock = "${pkgs.swaylock-effects}/bin/swaylock --daemonize";
+      # TODO: modify "display" function based on your window manager
+      # Sway
+      display = status: "swaymsg 'output * power ${status}'";
+    in
     {
-      timeout = 240; # in seconds
-      command = "${pkgs.brightnessctl}/bin/brightnessctl set 50%-";
-      resumeCommand = "${pkgs.brightnessctl}/bin/brightnessctl set +50%";
-    }
-    {
-      timeout = 300;
-      command = lock;
-    }
-    {
-      timeout = 600;
-      command = display "off";
-      resumeCommand = display "on";
-    }
-    {
-      timeout = 900;
-      command = "${pkgs.systemd}/bin/systemctl suspend";
-    }
-  ];
-  events = [
-    {
-      event = "before-sleep";
-      # adding duplicated entries for the same event may not work
-      command = (display "off") + "; " + lock;
-    }
-    {
-      event = "after-resume";
-      command = display "on";
-    }
-    {
-      event = "lock";
-      command = (display "off") + "; " + lock;
-    }
-    {
-      event = "unlock";
-      command = display "on";
-    }
-  ];
-};
+      enable = true;
+      timeouts = [
+        {
+          timeout = 240; # in seconds
+          command = "${pkgs.brightnessctl}/bin/brightnessctl set 50%-";
+          resumeCommand = "${pkgs.brightnessctl}/bin/brightnessctl set +50%";
+        }
+        {
+          timeout = 300;
+          command = lock;
+        }
+        {
+          timeout = 600;
+          command = display "off";
+          resumeCommand = display "on";
+        }
+        {
+          timeout = 900;
+          command = "${pkgs.systemd}/bin/systemctl suspend";
+        }
+      ];
+      events = [
+        {
+          event = "before-sleep";
+          # adding duplicated entries for the same event may not work
+          command = (display "off") + "; " + lock;
+        }
+        {
+          event = "after-resume";
+          command = display "on";
+        }
+        {
+          event = "lock";
+          command = (display "off") + "; " + lock;
+        }
+        {
+          event = "unlock";
+          command = display "on";
+        }
+      ];
+    };
+
+  services.way-displays.enable = true;
+  services.way-displays.settings = {
+    SCALING = false;
+    VRR_OFF = [ "0x07C9" ];
+  };
 
   services.swww.enable = true;
   services.dunst = {
@@ -174,7 +239,7 @@ in {
         offset = "(30, 25)";
         separator_color = "#cdd6f4";
         frame_width = 0;
-        dmenu = "/usr/bin/wofi --show dmenu -p dunst";
+        dmenu = "${pkgs.rofi-wayland}/bin/rofi --show dmenu -p dunst";
       };
 
       urgency_low = {
@@ -208,34 +273,13 @@ in {
     };
   };
 
-  services.kanshi = {
-    enable = true;
-    settings = [
-      {
-        profile.name = "default";
-        profile.outputs = [
-          {
-            criteria = "HDMI-A-1";
-            scale = 1.0;
-            position = "0,420";
-          }
-          {
-            criteria = "DP-2";
-            transform = "90";
-            position = "2560,0";
-          }
-        ];
-      }
-    ];
-  };
-
   wayland.windowManager.sway = {
     enable = true;
     # package = pkgs.swayfx;
     xwayland = true;
     config = {
       modifier = "Mod4";
-      menu = "${pkgs.wofi}/bin/wofi --show drun";
+      menu = "${pkgs.rofi-wayland}/bin/rofi -show drun";
       terminal = "kitty";
       startup = [
         { command = "waypaper --restore"; }
@@ -284,12 +328,9 @@ in {
         };
       };
     };
-    extraConfig = ''
-      exec_always ${writeScript}/bin/sway-outputs
-
-      input * {
-      }
-    '';
+    # extraConfig = ''
+    #   exec_always ${writeScript}/bin/sway-outputs
+    # '';
   };
 
   home.pointerCursor = {
