@@ -31,7 +31,8 @@ in
       ce = "commit --amend"; # Commit amend with Edit
 
       lg = "log --graph --all --oneline";
-      lf = "log --graph --all --pretty=format:'%C(auto)%h%Creset %C(dim white)%an%Creset %G? %s %C(dim white)- %ar%Creset'";
+      lf = "log --graph --all --decorate --pretty=format:'%C(auto)%h%Creset %C(auto)%d%Creset %s
+%C(dim white)%ar by %C(dim blue)%an %C(dim green)(%G? [%GT])%Creset'";
     };
 
     extraConfig = {
