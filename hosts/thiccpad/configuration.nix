@@ -46,6 +46,9 @@
   hardware.graphics.enable = true;
   hardware.bluetooth.enable = true;
 
+  services.logind.lidSwitchExternalPower = "lock";
+  services.logind.powerKey = "hibernate";
+  services.logind.powerKeyLongPress = "poweroff";
   services.tlp = {
     enable = true;
     settings = {
