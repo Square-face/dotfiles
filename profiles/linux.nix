@@ -8,6 +8,7 @@
   options = { };
   config = {
     environment.systemPackages = with pkgs; [
+    xdg-utils
       uutils-coreutils-noprefix
       psmisc
     ];
