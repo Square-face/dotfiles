@@ -25,6 +25,7 @@ let
   '';
 in
 {
+  # imports = [./modules/ui/displays.nix];
   home.packages = with pkgs; [
     writeScript
     jq
@@ -222,7 +223,13 @@ in
   services.way-displays.enable = true;
   services.way-displays.settings = {
     SCALING = false;
-    VRR_OFF = [ "0x07C9" ];
+    VRR_OFF = [ ".*" ];
+    TRANSFORM = [
+      {
+        NAME_DESC = "DP-2";
+        TRANSFORM = "90";
+      }
+    ];
   };
 
   services.swww.enable = true;

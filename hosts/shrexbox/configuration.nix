@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, ... }:
 
 {
   imports = [
@@ -44,5 +44,17 @@
   system.stateVersion = "24.11"; # No Touch!
   hardware.graphics.enable = true;
 
+  services.zerotierone = {
+    enable = true;
+    joinNetworks = [ "a0cbf4b62a09e017" ];
+  };
+
   services.power-profiles-daemon.enable = true;
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
+    builtins.elem (lib.getName pkg) [
+      "zerotierone"
+      "steam"
+      "steam-unwrapped"
+    ];
 }
