@@ -19,6 +19,8 @@ in
 
     playerctl
     spotifywm
+    evince
+    usbutils
   ];
 
   # Configuration files managed via Home Manager
