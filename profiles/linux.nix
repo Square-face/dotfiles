@@ -8,7 +8,7 @@
   options = { };
   config = {
     environment.systemPackages = with pkgs; [
-    xdg-utils
+      xdg-utils
       uutils-coreutils-noprefix
       psmisc
     ];
@@ -81,5 +81,9 @@
 
     time.timeZone = "Europe/Stockholm";
     console.keyMap = "sv-latin1";
+                  nixpkgs.config.permittedInsecurePackages = [
+                "libsoup-2.74.3" # Required to install OrcaSlicer
+              ];
   };
+
 }
