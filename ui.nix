@@ -5,29 +5,8 @@
   ...
 }:
 
-let
-  writeScript = pkgs.writeShellScriptBin "sway-outputs" ''
-    #! /usr/bin/env bash
-    set -e
-    outputs=( $(swaymsg -t get_outputs | ${pkgs.jq}/bin/jq -r 'sort_by(.rect.x) | .[].name') )
-    primary=''${outputs[1]}
-    secondary=''${outputs[2]:-''${outputs[1]}}
-    swaymsg "
-      set \$primary \"$primary\";
-      set \$secondary \"$secondary\";
-      workspace 1 output \$primary;
-      workspace 2 output \$primary;
-      workspace 3 output \$primary;
-      workspace 9 output \$secondary;
-      workspace 10 output \$secondary;
-      workspace 1
-      "
-  '';
-in
 {
-  # imports = [./modules/ui/displays.nix];
   home.packages = with pkgs; [
-    writeScript
     jq
     hellwal
     brightnessctl
@@ -173,8 +152,6 @@ in
     let
       # Lock command
       lock = "${pkgs.swaylock-effects}/bin/swaylock --daemonize";
-      # TODO: modify "display" function based on your window manager
-      # Sway
       display = status: "swaymsg 'output * power ${status}'";
     in
     {
@@ -220,16 +197,21 @@ in
       ];
     };
 
-  services.way-displays.enable = true;
-  services.way-displays.settings = {
-    SCALING = false;
-    VRR_OFF = [ ".*" ];
-    TRANSFORM = [
-      {
-        NAME_DESC = "DP-2";
-        TRANSFORM = "90";
-      }
-    ];
+  services.kanshi.enable = true;
+  services.kanshi.profiles = {
+      PC = {
+          outputs = [
+          {
+              criteria = "Lenovo Group Limited 0x1144 VM-06485";
+              transform = "90";
+              position = "2560,600";
+        }
+        {criteria = "Samsung Electric Company S24D340 0x30343238";
+        position="640,0";}
+        {criteria = "Philips Consumer Electronics Company Philips 272P4 AU41344000763"; position="0,1080";}
+          ];
+          };
+  
   };
 
   services.swww.enable = true;
@@ -335,9 +317,6 @@ in
         };
       };
     };
-    # extraConfig = ''
-    #   exec_always ${writeScript}/bin/sway-outputs
-    # '';
   };
 
   home.pointerCursor = {
