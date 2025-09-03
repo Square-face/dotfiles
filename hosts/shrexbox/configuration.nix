@@ -13,10 +13,11 @@
     ## services
     ../../modules/services/ssh.nix
     ../../modules/services/wireguard.nix
+    ../../modules/services/udev.nix
 
     ## Virtualization
-    ../../modules/virtualization/libvrt.nix
-    ../../modules/virtualization/docker.nix
+    # ../../modules/virtualization/libvrt.nix
+    # ../../modules/virtualization/docker.nix
 
     ## Programs
     ../../modules/graphical/obs.nix
@@ -25,6 +26,10 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
+
+  boot.kernelParams = ["resume_offset=67440640"];
+  boot.resumeDevice = "/dev/disk/by-uuid/e871e0c4-ed32-41a7-87cf-5cf90bd27e8c";
+  powerManagement.enable = true;
 
   networking = {
     hostName = "shrexbox";
@@ -57,4 +62,9 @@
       "steam"
       "steam-unwrapped"
     ];
+
+  swapDevices = [{
+    device = "/swapfile";
+    size = 64 * 1024; # 16GB
+  }];
 }
