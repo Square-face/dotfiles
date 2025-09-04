@@ -22,7 +22,7 @@
                 border-radius = mkLiteral "12px";
 
                 transparency = "real";
-                background-color = mkLiteral "black / 10%";
+                background-color = mkLiteral "black / 20%";
 
                 margin = mkLiteral "0px";
                 padding = mkLiteral "0px";
@@ -48,7 +48,7 @@
                 border = mkLiteral "0px solid";
                 border-radius = mkLiteral "10px";
 
-                background-color = mkLiteral "white / 5%";
+                background-color = mkLiteral "white / 15%";
                 text-color = mkLiteral "#cdd6f4";
                 children = ["prompt" "entry"];
             };
@@ -137,7 +137,7 @@
             };
 
             "element selected.normal" = {
-                background-color = mkLiteral "white / 5%";
+                background-color = mkLiteral "white / 15%";
                 text-color = mkLiteral "#cdd6f4";
             };
 
