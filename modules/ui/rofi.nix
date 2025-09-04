@@ -1,52 +1,84 @@
 {pkgs, config, ...}: {
 
-    programs.rofi = {
+    programs.rofi = let
+            inherit (config.lib.formats.rasi) mkLiteral;
+        in {
         enable = true;
         package = pkgs.rofi-wayland;
         terminal = "${pkgs.kitty}/bin/kitty";
 
-        theme = let
-            inherit (config.lib.formats.rasi) mkLiteral;
-        in {
-            "*" = {
-                background-color = mkLiteral "#11111b";
-                text-color = mkLiteral "#cdd6f4";
+        extraConfig = {
+            show-icons = mkLiteral "true";
+            display-drun= " ";
+            drun-display-format= "{name}";
+        };
+
+        theme = {
+            window = {
+                enabled = mkLiteral "true";
+                location = mkLiteral "center";
+                anchor = mkLiteral "center";
+
+                border-radius = mkLiteral "12px";
+
+                transparency = "real";
+                background-color = mkLiteral "black / 10%";
+
+                margin = mkLiteral "0px";
+                padding = mkLiteral "0px";
             };
 
-            textbox-prompt-colon = {
-                margin = mkLiteral "0px 0.3000em 0.0000em 0.0000em";
-                expand = mkLiteral "false";
-                str = ":";
-                text-color = mkLiteral "inherit";
-            };
+            mainbox = {
+                enabled = mkLiteral "true";
+                background-color = mkLiteral "transparent";
 
-            prompt = {
-                content = "shize";
-            };
-            entry = {
-                placeholder = "Search";
+                spacing = mkLiteral "20px";
+                margin = mkLiteral "0px";
+                padding = mkLiteral "20px";
+                children = ["inputbar" "listview"];
             };
 
             inputbar = {
-                children = [
-                    "prompt"
-                    "entry"
-                    "case-indicator"
-                  ];
+                enabled = mkLiteral "true";
+
+                spacing = mkLiteral "10px";
+                margin = mkLiteral "0px";
+                padding = mkLiteral "15px";
+
+                border = mkLiteral "0px solid";
+                border-radius = mkLiteral "10px";
+
+                background-color = mkLiteral "white / 5%";
+                text-color = mkLiteral "#cdd6f4";
+                children = ["prompt" "entry"];
             };
 
-            element = {
-              orientation = "horizontal";
-              children = [
-                "element-icon"
-                "element-text"
-              ];
+            prompt = {
+                enabled = mkLiteral "true";
+                background-color = mkLiteral "transparent";
+                text-color = mkLiteral "inherit";
             };
-            element-icon = {
-              size = mkLiteral "2em";
+
+            text-prompt-colon = {
+                enabled = mkLiteral "true";
+                expand = mkLiteral "false";
+
+                str = "::";
+
+                background-color = mkLiteral "transparent";
+                text-color = mkLiteral "inherit";
             };
-            element-text = {
-              size = mkLiteral "1.5em";
+
+
+            entry = {
+                enabled = mkLiteral "true";
+
+                cursor = mkLiteral "text";
+                placeholder = "Search";
+                placeholder-color = mkLiteral "inherit";
+
+                background-color = mkLiteral "transparent";
+                text-color = mkLiteral "inherit";
             };
         };
     };
