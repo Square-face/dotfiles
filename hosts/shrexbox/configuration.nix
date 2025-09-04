@@ -20,7 +20,7 @@
     ../../modules/virtualization/docker.nix
 
     ## Programs
-    ../../modules/graphical/obs.nix
+    # ../../modules/graphical/obs.nix
     ../../modules/graphical/steam.nix
 
     # Include the results of the hardware scan.

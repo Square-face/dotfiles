@@ -26,7 +26,7 @@
           nix-shell -p "$@" --run zsh
       }
     '';
-    dotDir = ".config/zsh";
+    dotDir = "${config.xdg.configHome}/zsh";
     history = {
       path = "${config.xdg.dataHome}/zsh/zsh_history";
       ignoreAllDups = true;

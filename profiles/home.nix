@@ -1,8 +1,4 @@
-{ pkgs, lib, ... }: let
-
-  hmDir = ../files;
-
-in {
+{ pkgs, config, lib, ... }: {
     home.username = "sq8";
     home.homeDirectory = "/home/sq8";
 
@@ -21,6 +17,7 @@ in {
     home.sessionVariables = {
         RUSTUP_HOME = "${config.xdg.dataHome}/rustup";
         CARGO_HOME = "${config.xdg.dataHome}/cargo";
+        DOCKER_CONFIG = "${config.xdg.configHome}/docker";
         WINEPREFIX = "${config.xdg.dataHome}/wineprefixes";
     };
 

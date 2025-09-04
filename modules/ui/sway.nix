@@ -1,4 +1,8 @@
-{pkgs, config, lib, ...}: {
+{pkgs, config, lib, ...}: let
+
+  hmDir = ../../files;
+
+in {
     programs.swaylock.enable = true;
     programs.swaylock.package = pkgs.swaylock-effects;
 
