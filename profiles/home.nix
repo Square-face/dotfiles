@@ -1,63 +1,56 @@
-{
-  pkgs,
-  lib,
-  ...
-}:
+{ pkgs, lib, ... }: let
 
-let
   hmDir = ../files;
-in
-{
-  home.username = "sq8";
-  home.homeDirectory = "/home/sq8";
 
-  # Packages installed for the user
-  home.packages = with pkgs; [
-    grim
-    slurp
-    wl-clipboard-rs
+in {
+    home.username = "sq8";
+    home.homeDirectory = "/home/sq8";
 
-    playerctl
-    spotifywm
-    evince
-    usbutils
-  ];
+    # Packages installed for the user
+    home.packages = with pkgs; [
+        grim
+        slurp
+        wl-clipboard-rs
 
-  # Configuration files managed via Home Manager
-  home.file = {
-    ".config/waybar/config.jsonc".source = "${hmDir}/waybar.jsonc";
-    ".config/waybar/lock.sh".source = "${hmDir}/lock.sh";
-    ".config/waybar/style.css".source = "${hmDir}/waybar.css";
+        playerctl
+        spotifywm
+        evince
+        usbutils
+    ];
 
-    ".config/wofi/config".source = "${hmDir}/wofi.conf";
-    ".config/wofi/style.css".source = "${hmDir}/wofi.css";
-  };
+    home.sessionVariables = {
+        RUSTUP_HOME = "${config.xdg.dataHome}/rustup";
+        CARGO_HOME = "${config.xdg.dataHome}/cargo";
+        WINEPREFIX = "${config.xdg.dataHome}/wineprefixes";
+    };
 
-  # Home Manager modules to include (these should be proper HM modules)
-  imports = [
-    ../modules/shell/gpg.nix
-    ../modules/shell/eza.nix
-    ../modules/shell/zsh.nix
-    ../modules/shell/tmux.nix
-    ../modules/shell/xdg.nix
-    ../modules/shell/zoxide.nix
+    # Home Manager modules to include (these should be proper HM modules)
+    imports = [
+        ../modules/shell/gpg.nix
+        ../modules/shell/eza.nix
+        ../modules/shell/zsh.nix
+        ../modules/shell/tmux.nix
+        ../modules/shell/xdg.nix
+        ../modules/shell/zoxide.nix
 
-    ../modules/dev/git.nix
-    ../modules/dev/neovim.nix
-    ../modules/graphical/firefox.nix
-    ../modules/graphical/virt-manager.nix
-    ../modules/graphical/kitty.nix
-    ../modules/graphical/waypaper.nix
+        ../modules/dev/git.nix
+        ../modules/dev/neovim.nix
+        ../modules/graphical/firefox.nix
+        ../modules/graphical/virt-manager.nix
+        ../modules/graphical/kitty.nix
+        ../modules/graphical/waypaper.nix
 
-    ../ui.nix
-  ];
+        ../modules/ui/gtk.nix
+        ../modules/ui/sway.nix
+        ../modules/ui/dunst.nix
+        ../modules/ui/rofi.nix
+        ../modules/ui/kanshi.nix
+    ];
 
-  # Optional: Set Home Manager state version (prevents breakage on updates)
-  home.stateVersion = "24.11";
+    # Optional: Set Home Manager state version (prevents breakage on updates)
+    home.stateVersion = "24.11";
 
-  nixpkgs.config.allowUnfreePredicate =
-    pkg:
-    builtins.elem (lib.getName pkg) [
-      "spotify"
+    nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+        "spotify"
     ];
 }
