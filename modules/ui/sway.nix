@@ -142,7 +142,6 @@ in {
     # Configuration files managed via Home Manager
     home.file = {
         ".config/waybar/config.jsonc".source = "${hmDir}/waybar.jsonc";
-        ".config/waybar/lock.sh".source = "${hmDir}/lock.sh";
         ".config/waybar/style.css".source = "${hmDir}/waybar.css";
     };
 }
