@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, ... }:
 
 {
   imports = [
@@ -31,15 +31,11 @@
     firewall.enable = false;
     useDHCP = false;
     interfaces.wlp0s20f3.useDHCP = true;
-    hosts = {
-      "10.10.10.1" = [ "cluster-endpoint" ];
-    };
   };
 
   wg.shitcloud = {
     enable = true;
     localIP = "10.10.10.103";
-    dns.enable = true;
   };
 
   system.stateVersion = "24.11"; # No Touch!

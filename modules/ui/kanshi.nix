@@ -2,6 +2,7 @@
     services.kanshi.enable = true;
 
     services.kanshi.settings = [
+        {include = "config.d/*";}
         {
             profile.name = "PC";
             profile.outputs = [
