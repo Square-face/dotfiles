@@ -22,7 +22,7 @@
                 border-radius = mkLiteral "12px";
 
                 transparency = "real";
-                background-color = mkLiteral "black / 20%";
+                background-color = mkLiteral "black / 60%";
 
                 margin = mkLiteral "0px";
                 padding = mkLiteral "0px";
