@@ -86,6 +86,11 @@ in {
         enable = true;
         # package = pkgs.swayfx;
         xwayland = true;
+
+            extraConfig = ''
+            bindgesture swipe:left workspace prev
+            bindgesture swipe:right workspace next
+            '';
         config = {
             modifier = "Mod4";
             menu = "${pkgs.rofi-wayland}/bin/rofi -show drun";
