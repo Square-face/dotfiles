@@ -12,7 +12,6 @@
 
     ## services
     ../../modules/services/ssh.nix
-    ../../modules/services/wireguard.nix
 
     ## Virtualization
     # ../../modules/virtualization/libvrt.nix
@@ -26,16 +25,13 @@
     ./hardware-configuration.nix
   ];
 
+  networking.wg-quick.interfaces.wg0.configFile = "/etc/wireguard/wg0.conf";
+
   networking = {
     hostName = "thiccpad";
     firewall.enable = false;
     useDHCP = false;
     interfaces.wlp0s20f3.useDHCP = true;
-  };
-
-  wg.shitcloud = {
-    enable = true;
-    localIP = "10.10.10.103";
   };
 
   system.stateVersion = "24.11"; # No Touch!

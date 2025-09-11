@@ -12,7 +12,6 @@
 
     ## services
     ../../modules/services/ssh.nix
-    ../../modules/services/wireguard.nix
     ../../modules/services/udev.nix
 
     ## Virtualization
@@ -39,11 +38,6 @@
     hosts = {
       "10.10.10.1" = [ "cluster-endpoint" ];
     };
-  };
-
-  wg.shitcloud = {
-    enable = true;
-    localIP = "10.10.10.101";
   };
 
   system.stateVersion = "24.11"; # No Touch!
