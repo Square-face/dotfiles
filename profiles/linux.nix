@@ -36,6 +36,12 @@
 
     home-manager.users.sq8 = import ./home.nix;
 
+    fileSystems."/mnt/share" = {
+        device = "10.0.1.241:/srv/nfs4/fren";
+        fsType = "nfs4";
+        options = ["rw" "sync" "noatime" "x-systemd.automount" "noauto" "x-systemd.idle-timeout=600" ];
+    };
+
     nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
         "steam"
         "steam-original"

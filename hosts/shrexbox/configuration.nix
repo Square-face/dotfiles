@@ -63,8 +63,8 @@
       "steam-unwrapped"
     ];
 
-  swapDevices = [{
-    device = "/swapfile";
-    size = 64 * 1024; # 16GB
-  }];
+    swapDevices = [{
+        device = "/swapfile";
+        size = 64 * 1024; # 16GB
+    }];
 }
