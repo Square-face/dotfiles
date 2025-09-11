@@ -13,6 +13,7 @@
     ## services
     ../../modules/services/ssh.nix
     ../../modules/services/udev.nix
+    ../../modules/services/cockpit.nix
 
     ## Virtualization
     ../../modules/virtualization/libvrt.nix
@@ -35,9 +36,6 @@
     firewall.enable = false;
     useDHCP = false;
     interfaces.enp14s0.useDHCP = true;
-    hosts = {
-      "10.10.10.1" = [ "cluster-endpoint" ];
-    };
   };
 
   system.stateVersion = "24.11"; # No Touch!

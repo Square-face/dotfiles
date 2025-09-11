@@ -31,6 +31,26 @@
         ];
     };
 
+    users.users.ultra = {
+        isNormalUser = true;
+        shell = pkgs.zsh;
+        description = "Casper Medin Jensen";
+        openssh.authorizedKeys.keys = [
+            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIufvkDkpyHPWr8zjPtSFShNl25136YWMufD9/AtIjMv ultra@trallalero"
+        ];
+        extraGroups = [
+            "video"
+            "audio"
+        ];
+    };
+
+    security.pam.loginLimits = [{
+        domain = "ultra";
+        item = "priority";
+        type = "soft";
+        value = "10";
+    }];
+
     networking.networkmanager.enable = true;
     boot.tmp.cleanOnBoot = true;
 
@@ -65,6 +85,20 @@
     security.rtkit.enable = true;
     security.polkit.enable = true;
     security.pam.services.swaylock = {};
+    security.polkit.extraConfig = ''
+        const power_actions = [
+            'org.freedesktop.login1.reboot',
+            'org.freedesktop.login1.reboot-multiple-sessions',
+            'org.freedesktop.login1.power-off',
+            'org.freedesktop.login1.power-off-multiple-sessions'
+        ];
+
+        polkit.addRule(function ({ id }, subject) {
+            if (power_actions.includes(id)) {
+                return subject.isInGroup('power') ? polkit.Result.YES : polkit.Result.AUTH_ADMIN;
+            }
+        });
+    '';
 
     services.pcscd.enable = true;
     services.udisks2.enable = true;
