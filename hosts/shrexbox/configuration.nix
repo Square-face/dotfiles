@@ -16,8 +16,8 @@
     ../../modules/services/cockpit.nix
 
     ## Virtualization
-    ../../modules/virtualization/libvrt.nix
-    ../../modules/virtualization/docker.nix
+    # ../../modules/virtualization/libvrt.nix
+    # ../../modules/virtualization/docker.nix
 
     ## Programs
     # ../../modules/graphical/obs.nix
@@ -38,11 +38,16 @@
     interfaces.enp14s0.useDHCP = true;
   };
 
+    services.prometheus.exporters.node = {
+        enable = true;
+        port = 9000;
+    };
+
   system.stateVersion = "24.11"; # No Touch!
   hardware.graphics.enable = true;
 
   services.zerotierone = {
-    enable = true;
+    enable = false;
     joinNetworks = [ "a0cbf4b62a09e017" ];
   };
 
