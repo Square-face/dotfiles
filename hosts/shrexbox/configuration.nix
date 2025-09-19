@@ -29,6 +29,7 @@
 
     boot.kernelParams = ["resume_offset=67440640"];
     boot.resumeDevice = "/dev/disk/by-uuid/e871e0c4-ed32-41a7-87cf-5cf90bd27e8c";
+    powerManagement.enable = true;
 
     networking = {
         hostName = "shrexbox";
@@ -42,17 +43,20 @@
         port = 9000;
     };
 
+    system.stateVersion = "24.11"; # No Touch!
     hardware.graphics.enable = true;
 
-    powerManagement.enable = true;
-    services.power-profiles-daemon.enable = true;
+    services.zerotierone = {
+        enable = false;
+        joinNetworks = [ "a0cbf4b62a09e017" ];
+    };
 
-    nixpkgs.config.allowUnfreePredicate = pkg:
-        builtins.elem (lib.getName pkg) [
-            "zerotierone"
-            "steam"
-            "steam-unwrapped"
-        ];
+    services.power-profiles-daemon.enable = true;
+    nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+        "zerotierone"
+        "steam"
+        "steam-unwrapped"
+    ];
 
     swapDevices = [{
         device = "/swapfile";
