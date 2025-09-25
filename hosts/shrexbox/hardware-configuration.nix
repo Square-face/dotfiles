@@ -4,30 +4,32 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+    imports = [
+        (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "nvme" "ahci" "xhci_pci" "usbhid" "sd_mod" ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-amd" ];
-  boot.extraModulePackages = [ ];
+    boot.initrd.availableKernelModules = [ "nvme" "ahci" "xhci_pci" "usbhid" "sd_mod" ];
+    boot.initrd.kernelModules = [ ];
+    boot.kernelModules = [ "kvm-amd" ];
+    boot.extraModulePackages = [ ];
 
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/e871e0c4-ed32-41a7-87cf-5cf90bd27e8c";
-      fsType = "ext4";
+    fileSystems."/" = {
+        device = "/dev/disk/by-uuid/e871e0c4-ed32-41a7-87cf-5cf90bd27e8c";
+        fsType = "ext4";
     };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/ED71-9EFD";
-      fsType = "vfat";
-      options = [ "fmask=0077" "dmask=0077" ];
+    fileSystems."/boot" = {
+        device = "/dev/disk/by-uuid/ED71-9EFD";
+        fsType = "vfat";
+        options = [ "fmask=0077" "dmask=0077" ];
     };
 
-  fileSystems."/mnt/HDD_2TB" =
-    { device = "/dev/disk/by-uuid/d70b86cd-74fb-4b24-9b4d-9912c316a386";
-      fsType = "ext4";
+    fileSystems."/mnt/share" = {
+        device = "10.0.1.241:/srv/nfs4/fren";
+        fsType = "nfs4";
+        options = ["rw" "sync" "noatime" "nofail" "x-systemd.automount" "noauto" "x-systemd.idle-timeout=600" ];
     };
+
 
   swapDevices = [ ];
 
