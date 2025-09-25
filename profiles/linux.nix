@@ -51,6 +51,22 @@
         value = "10";
     }];
 
+    systemd.user.services."ultra" = {
+        description = "Resource limits for ultra";
+        wantedBy = [ "default.target" ];
+        serviceConfig = {
+            Slice = "user-1003";
+        };
+    };
+
+    systemd.slices."user-1003" = {
+        sliceConfig = {
+            MemoryMax = "60G";
+            CPUQuota = "3000%";
+            TasksMax = "5000";
+        };
+    };
+
     networking.networkmanager.enable = true;
     boot.tmp.cleanOnBoot = true;
 
