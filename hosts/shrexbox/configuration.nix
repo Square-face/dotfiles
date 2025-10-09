@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 
 {
     imports = [
@@ -41,6 +41,7 @@
     services.prometheus.exporters.node = {
         enable = true;
         port = 9000;
+        enabledCollectors = ["processes"];
     };
 
     system.stateVersion = "24.11"; # No Touch!
@@ -62,6 +63,12 @@
         device = "/swapfile";
         size = 64 * 1024; # 16GB
     }];
+
+    services.udev.packages = with pkgs; [ oversteer ];
+    services.udev.extraRules = ''
+        ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c261", RUN+="${pkgs.usb-modeswitch}/bin/usb_modeswitch -v 046d -p c261 -m 01 -r 01 -C 03 -M '0f00010142'"
+      '';
+    hardware.new-lg4ff.enable = true;
 
     system.stateVersion = "24.11"; # No Touch!
 }

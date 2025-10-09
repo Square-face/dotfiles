@@ -11,6 +11,7 @@
         xdg-utils
         uutils-coreutils-noprefix
         psmisc
+        oversteer
     ];
 
     users.users.sq8 = {
