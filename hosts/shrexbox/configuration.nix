@@ -44,13 +44,8 @@
         enabledCollectors = ["processes"];
     };
 
-    system.stateVersion = "24.11"; # No Touch!
-    hardware.graphics.enable = true;
-
-    services.zerotierone = {
-        enable = false;
-        joinNetworks = [ "a0cbf4b62a09e017" ];
-    };
+    networking.wg-quick.interfaces.wg0.configFile = "/etc/wireguard/wg0.conf";
+    networking.wg-quick.interfaces.wg1.configFile = "/etc/wireguard/wg1.conf";
 
     services.power-profiles-daemon.enable = true;
     nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
@@ -68,7 +63,16 @@
     services.udev.extraRules = ''
         ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c261", RUN+="${pkgs.usb-modeswitch}/bin/usb_modeswitch -v 046d -p c261 -m 01 -r 01 -C 03 -M '0f00010142'"
       '';
+
     hardware.new-lg4ff.enable = true;
+    hardware.graphics.enable = true;
+
+
+    # fileSystems."/mnt/share" = {
+    #     device = "10.0.1.241:/srv/nfs4/fren";
+    #     fsType = "nfs4";
+    #     options = ["rw" "sync" "noatime" "nofail" "x-systemd.automount" "noauto" "x-systemd.idle-timeout=600" ];
+    # };
 
     system.stateVersion = "24.11"; # No Touch!
 }

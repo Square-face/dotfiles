@@ -13,6 +13,7 @@
         evince
         usbutils
         nemo-with-extensions
+        prismlauncher
     ];
 
     home.sessionVariables = {

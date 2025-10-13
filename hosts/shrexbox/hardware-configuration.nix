@@ -24,12 +24,6 @@
         options = [ "fmask=0077" "dmask=0077" ];
     };
 
-    fileSystems."/mnt/share" = {
-        device = "10.0.1.241:/srv/nfs4/fren";
-        fsType = "nfs4";
-        options = ["rw" "sync" "noatime" "nofail" "x-systemd.automount" "noauto" "x-systemd.idle-timeout=600" ];
-    };
-
 
   swapDevices = [ ];
 
