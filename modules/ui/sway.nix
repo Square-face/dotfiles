@@ -87,10 +87,12 @@ in {
         # package = pkgs.swayfx;
         xwayland = true;
 
-            extraConfig = ''
+        extraConfig = ''
             bindgesture swipe:left workspace prev
             bindgesture swipe:right workspace next
-            '';
+
+            for_window [app_id="nm-tray"] floating enable
+        '';
         config = {
             modifier = "Mod4";
             menu = "${pkgs.rofi-wayland}/bin/rofi -show drun";

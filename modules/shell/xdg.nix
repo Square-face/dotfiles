@@ -5,15 +5,15 @@
         portal = {
                 enable = true;
                 config.sway.default = [
-                "wlr"
-                "gtk"
+                    "gtk"
+                    "wlr"
                 ];
                 config.sway = {
                     "org.freedesktop.impl.portal.ScreenCast" = [
-                        "wlr"
+                        "gtk"
                     ];
                     "org.freedesktop.impl.portal.Screenshot" = [
-                        "wlr"
+                        "gtk"
                     ];
                     "org.freedesktop.impl.portal.Inhibit" = [
                         "none"

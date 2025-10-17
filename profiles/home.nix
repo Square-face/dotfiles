@@ -35,6 +35,18 @@
         };
     };
 
+    services.spotifyd.enable = true;
+    services.spotifyd.settings = {
+        global = {
+            device_name = "SpotMaD";
+            device_type = "computer";
+            disable_discovery = true;
+        };
+    };
+    systemd.user.services.spotifyd = {
+        Install.WantedBy = lib.mkForce [ "graphical-session.target" ];
+    };
+
     # Home Manager modules to include (these should be proper HM modules)
     imports = [
         ../modules/shell/gpg.nix

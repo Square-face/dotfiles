@@ -29,7 +29,6 @@
 
     boot.kernelParams = ["resume_offset=67440640"];
     boot.resumeDevice = "/dev/disk/by-uuid/e871e0c4-ed32-41a7-87cf-5cf90bd27e8c";
-    powerManagement.enable = true;
 
     networking = {
         hostName = "shrexbox";
@@ -38,16 +37,14 @@
         interfaces.enp14s0.useDHCP = true;
     };
 
+    networking.wireguard.enable = true;
+
     services.prometheus.exporters.node = {
         enable = true;
         port = 9000;
         enabledCollectors = ["processes"];
     };
 
-    networking.wg-quick.interfaces.wg0.configFile = "/etc/wireguard/wg0.conf";
-    networking.wg-quick.interfaces.wg1.configFile = "/etc/wireguard/wg1.conf";
-
-    services.power-profiles-daemon.enable = true;
     nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
         "zerotierone"
         "steam"
@@ -67,6 +64,12 @@
     hardware.new-lg4ff.enable = true;
     hardware.graphics.enable = true;
 
+    networking.wireless.enable = false;
+    networking.wireless.userControlled.enable = false;
+    # networking.networkmanager.wifi.enable = false;
+    networking.networkmanager.wifi.backend = "iwd";
+    networking.wireless.iwd.enable = lib.mkForce false;
+
 
     # fileSystems."/mnt/share" = {
     #     device = "10.0.1.241:/srv/nfs4/fren";
@@ -75,4 +78,6 @@
     # };
 
     system.stateVersion = "24.11"; # No Touch!
+
+    networking.extraHosts = ''0.0.0.0 apresolve.spotify.com'';
 }

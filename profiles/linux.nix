@@ -12,6 +12,11 @@
         uutils-coreutils-noprefix
         psmisc
         oversteer
+
+        # Wine
+        wineWowPackages.stable
+        wineWowPackages.waylandFull
+        winetricks
     ];
 
     users.users.sq8 = {
