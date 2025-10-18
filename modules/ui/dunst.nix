@@ -12,7 +12,7 @@
                 offset = "(30, 25)";
                 separator_color = "#cdd6f4";
                 frame_width = 0;
-                dmenu = "${pkgs.rofi-wayland}/bin/rofi --show dmenu -p dunst";
+                dmenu = "${pkgs.rofi}/bin/rofi --show dmenu -p dunst";
             };
 
             urgency_low = {

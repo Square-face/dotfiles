@@ -95,7 +95,7 @@ in {
         '';
         config = {
             modifier = "Mod4";
-            menu = "${pkgs.rofi-wayland}/bin/rofi -show drun";
+            menu = "${pkgs.rofi}/bin/rofi -show drun";
             terminal = "kitty";
             startup = [
                 { command = "waypaper --restore"; }

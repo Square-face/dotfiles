@@ -4,7 +4,7 @@
             inherit (config.lib.formats.rasi) mkLiteral;
         in {
         enable = true;
-        package = pkgs.rofi-wayland;
+        package = pkgs.rofi;
         terminal = "${pkgs.kitty}/bin/kitty";
 
         extraConfig = {
