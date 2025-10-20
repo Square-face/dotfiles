@@ -6,7 +6,7 @@
   programs.firefox = {
     enable = true;
     # Refer to https://mozilla.github.io/policy-templates or `about:policies#documentation` in firefox
-    # package = pkgs.librewolf;
+    package = pkgs.librewolf;
     policies = {
       AppAutoUpdate = false; # Disable automatic application update
       BackgroundAppUpdate = false; # Disable automatic application update in the background, when the application is not running.
