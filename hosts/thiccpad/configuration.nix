@@ -25,8 +25,6 @@
         ./hardware-configuration.nix
     ];
 
-    networking.wg-quick.interfaces.wg0.configFile = "/etc/wireguard/wg0.conf";
-
     networking = {
         hostName = "thiccpad";
         firewall.enable = false;
@@ -34,19 +32,15 @@
         interfaces.wlp0s20f3.useDHCP = true;
     };
 
-    services.prometheus.exporters.node = {
-        enable = true;
-        listenAddress = "10.0.2.2";
-        port = 9000;
-    };
-
     system.stateVersion = "24.11"; # No Touch!
     hardware.graphics.enable = true;
     hardware.bluetooth.enable = true;
 
-    services.logind.lidSwitchExternalPower = "lock";
-    services.logind.powerKey = "hibernate";
-    services.logind.powerKeyLongPress = "poweroff";
+    networking.wireguard.enable = true;
+
+    services.logind.settings.Login.HandleLidSwitchExternalPower = "lock";
+    services.logind.settings.Login.HandlePowerKey = "hibernate";
+    services.logind.settings.Login.HandlePowerKeyLongPress = "poweroff";
     services.tlp = {
         enable = true;
         settings = {
