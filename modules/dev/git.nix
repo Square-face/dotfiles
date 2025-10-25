@@ -12,7 +12,8 @@ in
 
   programs.git = {
     enable = true;
-    aliases = {
+    settings = {
+    alias = {
       pu = "push";
       pl = "pull";
       plr = "pull --rebase";
@@ -35,7 +36,6 @@ in
 %C(dim white)%ar by %C(dim blue)%an %C(dim green)(%G? [%GT])%Creset'";
     };
 
-    extraConfig = {
       gpg.program = "${pkgs.gnupg}/bin/gpg";
       init.defaultBranch = "main";
       user.signingKey = "59BC 481E 817E 00C2 3930  D7AA 8087 49C2 CFE5 F9E8";
