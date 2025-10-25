@@ -8,7 +8,7 @@
 
         # Load NixOs modules
         ../../modules/bootloader/grub.nix
-        ../../modules/machines.nix
+        # ../../modules/machines.nix
 
         ## services
         ../../modules/services/ssh.nix
