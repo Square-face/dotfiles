@@ -14,18 +14,21 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/2af19cf9-f2c6-4253-b1d7-9865a971be63";
+    { device = "/dev/disk/by-uuid/1c4f0fb4-842b-485e-80f9-fc5a25b7cfa9";
       fsType = "ext4";
     };
 
+  boot.initrd.luks.devices."luks-a27b23ae-6431-47a9-89a6-230e42d18b61".device = "/dev/disk/by-uuid/a27b23ae-6431-47a9-89a6-230e42d18b61";
+  boot.initrd.luks.devices."luks-67b52ee7-e717-4f2a-bb16-f54655683374".device = "/dev/disk/by-uuid/67b52ee7-e717-4f2a-bb16-f54655683374";
+
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/62CD-E95A";
+    { device = "/dev/disk/by-uuid/FED1-49E1";
       fsType = "vfat";
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/e15ee149-1162-4d55-adeb-ef2ca9bb2bf7"; }
+    [ { device = "/dev/disk/by-uuid/24f72eb3-5d99-4f11-aa71-b74087631358"; }
     ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
@@ -33,6 +36,7 @@
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
+  # networking.interfaces.enp0s20f0u2u4.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp0s31f6.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlp0s20f3.useDHCP = lib.mkDefault true;
 
