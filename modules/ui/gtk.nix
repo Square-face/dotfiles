@@ -44,6 +44,7 @@
         gtk-icon-theme-name=Papirus-Dark
         gtk-cursor-theme-name=Bibata-Modern-Classic
         gtk-font-name=Sans 10
+	gtk-application-prefer-dark-theme=1
     '';
 
     home.file.".config/gtk-4.0/settings.ini".text = ''
@@ -51,5 +52,6 @@
         gtk-theme-name=Catppuccin-GTK-Dark
         gtk-icon-theme-name=Papirus-Dark
         gtk-cursor-theme-name=Bibata-Modern-Classic
+	gtk-application-prefer-dark-theme=1
     '';
 }
