@@ -15,7 +15,7 @@
 
         ## Virtualization
         # ../../modules/virtualization/libvrt.nix
-        # ../../modules/virtualization/docker.nix
+        ../../modules/virtualization/docker.nix
 
         ## Programs
         ../../modules/graphical/obs.nix
