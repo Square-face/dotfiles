@@ -68,7 +68,7 @@
 
       packages.x86_64-linux.liveIso = nixos-generators.nixosGenerate {
           system = "x86_64-linux";
-          format = "install-iso";
+          format = "iso";
 
           modules = [
             ./hosts/iso/configuration.nix

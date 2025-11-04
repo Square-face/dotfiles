@@ -25,6 +25,7 @@
         description = "Linus Michelsson";
         openssh.authorizedKeys.keys = [
             "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPP9DFLLWEmyjcIJYXrPJEgV7Mk6eLwm60bPLJstiakl linus@sq8.dev"
+            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIN5D+pEdcsfKqDe54yG92GPpm8X9PP3H4M7idvgGrs2G linus@sq8.dev"
         ];
         extraGroups = [
             "networkmanager"

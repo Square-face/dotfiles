@@ -81,4 +81,16 @@
     system.stateVersion = "24.11"; # No Touch!
 
     networking.extraHosts = ''0.0.0.0 apresolve.spotify.com'';
+
+    networking = {
+        interfaces = {
+            enp14s0 = {
+                wakeOnLan.enable = true;
+            };
+        };
+        firewall = {
+            allowedUDPPorts = [ 9 ];
+        };
+    };
+
 }
