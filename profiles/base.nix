@@ -1,13 +1,6 @@
 { pkgs, ... }:
 
 {
-
-  # Automatic background cleanup
-  nix.gc.automatic = true;
-  nix.optimise.automatic = true;
-  nix.gc.randomizedDelaySec = "45min";
-  nix.optimise.randomizedDelaySec = "45min";
-
   nix.settings = {
     trusted-users = [ "sq8" ];
     use-xdg-base-directories = true;
