@@ -31,14 +31,27 @@
         hostName = "shrexbox";
         firewall.enable = false;
         useDHCP = false;
-        interfaces.enp14s0.useDHCP = true;
+        dhcpcd.enable = false;
     };
+
+    networking.interfaces.enp14s0 = {
+        ipv4.addresses = [{
+            address = "192.168.8.218";
+            prefixLength = 24;
+        }];
+    };
+    networking.defaultGateway = {
+        address = "192.168.8.1";
+        interface = "enp14s0";
+    };
+    networking.nameservers = ["1.1.1.1" "8.8.8.8" "192.168.8.1"];
 
     networking.wireguard.enable = true;
 
     services.prometheus.exporters.node = {
         enable = true;
         port = 9000;
+        disabledCollectors = ["xfs" "zfs" "bcache" "btrfs" "fibrechannel" "loadavg" "selinux" "infiniband" "mdadm" "ipvs" "edac" "conntrack" "hwmon" "rapl" ];
         enabledCollectors = ["processes"];
     };
 
@@ -79,8 +92,6 @@
     # };
 
     system.stateVersion = "24.11"; # No Touch!
-
-    networking.extraHosts = ''0.0.0.0 apresolve.spotify.com'';
 
     networking = {
         interfaces = {

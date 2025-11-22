@@ -28,5 +28,6 @@
     # hardware.graphics.enable = true;
     # hardware.bluetooth.enable = true;
 
+    services.hardware.openrgb.enable = true;
     networking.wireguard.enable = true;
 }

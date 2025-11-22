@@ -4,9 +4,6 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
     nix-darwin.url = "github:nix-darwin/nix-darwin/master";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -20,7 +17,6 @@
     {
       nixpkgs,
       nix-darwin,
-      home-manager,
       nixos-generators,
       ...
     }:
@@ -33,7 +29,6 @@
           modules = [
             ./hosts/${name}/configuration.nix
 
-            home-manager.nixosModules.home-manager
             {
               nixpkgs.hostPlatform = system;
             }
@@ -47,8 +42,6 @@
 
           modules = [
             ./hosts/${name}/configuration.nix
-
-            home-manager.darwinModules.home-manager
 
             {
               nixpkgs.hostPlatform = system;
@@ -72,11 +65,6 @@
 
           modules = [
             ./hosts/iso/configuration.nix
-
-            home-manager.nixosModules.home-manager
-            {
-              nixpkgs.hostPlatform = "x86_64-linux";
-            }
           ];
         };
     };

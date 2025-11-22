@@ -3,7 +3,7 @@
         catppuccin-grub
     ];
 
-    boot.loader.timeout = 10;
+    boot.loader.timeout = 0;
     boot.loader.grub = {
         enable = true;
         useOSProber = true;
