@@ -51,12 +51,11 @@
     services.prometheus.exporters.node = {
         enable = true;
         port = 9000;
-        disabledCollectors = ["xfs" "zfs" "bcache" "btrfs" "fibrechannel" "loadavg" "selinux" "infiniband" "mdadm" "ipvs" "edac" "conntrack" "hwmon" "rapl" ];
-        enabledCollectors = ["processes"];
+        extraFlags = ["--collector.disable-defaults" "--collector.netdev.device-include=\"enp14s0|wg0\"" "--collector.filesystem.mount-points-exclude=\"/nix/store\"" "--web.disable-exporter-metrics"];
+        enabledCollectors = ["cpu" "cpufreq" "meminfo" "netdev" "diskstats" "filesystem" "stat" "processes"];
     };
 
     nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-        "zerotierone"
         "steam"
         "steam-unwrapped"
     ];
@@ -103,5 +102,4 @@
             allowedUDPPorts = [ 9 ];
         };
     };
-
 }
