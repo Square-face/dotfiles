@@ -26,7 +26,7 @@
     orca-slicer
 
     # Password Manager
-    bitwarden
+    bitwarden-desktop
 
     # Utils
     fd
