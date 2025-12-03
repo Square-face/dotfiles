@@ -41,6 +41,7 @@
     services.logind.settings.Login.HandleLidSwitchExternalPower = "lock";
     services.logind.settings.Login.HandlePowerKey = "hibernate";
     services.logind.settings.Login.HandlePowerKeyLongPress = "poweroff";
+    services.power-profiles-daemon.enable = false;
     services.tlp = {
         enable = true;
         settings = {
