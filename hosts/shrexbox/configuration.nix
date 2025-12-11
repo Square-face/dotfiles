@@ -13,6 +13,7 @@
         ## services
         ../../modules/services/ssh.nix
         ../../modules/services/udev.nix
+        ../../modules/services/audio.nix
 
         ## Virtualization
         ../../modules/virtualization/libvrt.nix
