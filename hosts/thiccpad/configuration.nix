@@ -14,7 +14,7 @@
         ../../modules/services/ssh.nix
 
         ## Virtualization
-        # ../../modules/virtualization/libvrt.nix
+        ../../modules/virtualization/libvrt.nix
         ../../modules/virtualization/docker.nix
 
         ## Programs
@@ -30,6 +30,7 @@
         firewall.enable = false;
         useDHCP = false;
         interfaces.wlp0s20f3.useDHCP = true;
+        interfaces.enp0s31f6.useDHCP = true;
     };
 
     system.stateVersion = "24.11"; # No Touch!
