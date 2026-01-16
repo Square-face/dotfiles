@@ -22,6 +22,10 @@
     programs.sway.enable = true;
     services.desktopManager.plasma6.enable = true;
 
+    systemd.services.nix-daemon.serviceConfig = {
+        CPUWeight=80;
+    };
+
     users.users.sq8 = {
         isNormalUser = true;
         shell = pkgs.zsh;

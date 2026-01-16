@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ pkgs, lib, ... }:
 
 {
     imports = [
@@ -15,7 +15,7 @@
 
         ## Virtualization
         ../../modules/virtualization/libvrt.nix
-        ../../modules/virtualization/docker.nix
+        ../../modules/virtualization/podman.nix
 
         ## Programs
         ../../modules/graphical/obs.nix
@@ -24,6 +24,8 @@
         # Include the results of the hardware scan.
         ./hardware-configuration.nix
     ];
+
+    boot.kernelPackages = pkgs.linuxPackages_zen;
 
     networking = {
         hostName = "thiccpad";
