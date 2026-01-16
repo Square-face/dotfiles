@@ -17,7 +17,14 @@
         wineWowPackages.stable
         wineWowPackages.waylandFull
         winetricks
+
+        # Man pages
+        man-pages
+        man-pages-posix
     ];
+
+    documentation.dev.enable = true;
+
 
     programs.sway.enable = true;
     services.desktopManager.plasma6.enable = true;
@@ -42,6 +49,7 @@
             "libvirtd"
             "kvm"
             "wheel"
+            "podman"
         ];
     };
 
