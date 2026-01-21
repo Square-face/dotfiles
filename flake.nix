@@ -39,7 +39,7 @@
       nixosConfigurations = {
         shrexbox = mkLinuxHost "shrexbox" "x86_64-linux";
         thiccpad = mkLinuxHost "thiccpad" "x86_64-linux";
-
+        flappy   = mkLinuxHost "flappy" "x86_64-linux";
       };
 
       packages.x86_64-linux.liveIso = nixos-generators.nixosGenerate {
