@@ -2,30 +2,35 @@
 
 {
     imports = [
-        # Load linux profile
-        ../../profiles/base.nix
-        ../../profiles/linux.nix
-
-        # Load NixOs modules
-        ../../modules/bootloader/grub.nix
-        # ../../modules/machines.nix
-
-        ## services
-        ../../modules/services/ssh.nix
-
-        ## Virtualization
-        ../../modules/virtualization/libvrt.nix
-        ../../modules/virtualization/podman.nix
-
-        ## Programs
-        ../../modules/graphical/obs.nix
-        ../../modules/graphical/steam.nix
-
-        # Include the results of the hardware scan.
+        ../../modules/default.nix
         ./hardware-configuration.nix
     ];
 
+    ssh.enable = true;
+    tlp.enable = true;
+    
+    audio.enable = true;
+    audio.low-latency = false;
+
+    podman.enable = true;
+    libvirtd.enable = true;
+
+    sq8.enabled = true;
+    ultra.enabled = true;
+
+    grub.enable = true;
+
     boot.kernelPackages = pkgs.linuxPackages_zen;
+
+    hardware.graphics.enable = true;
+    hardware.bluetooth.enable = true;
+    hardware.sensor.iio.enable = true;
+
+    networking.wireguard.enable = true;
+
+    services.logind.settings.Login.HandleLidSwitchExternalPower = "lock";
+    services.logind.settings.Login.HandlePowerKey = "hibernate";
+    services.logind.settings.Login.HandlePowerKeyLongPress = "poweroff";
 
     networking = {
         hostName = "flappy";
@@ -35,35 +40,4 @@
     };
 
     system.stateVersion = "25.11"; # No Touch!
-    hardware.graphics.enable = true;
-    hardware.bluetooth.enable = true;
-
-    hardware.sensor.iio.enable = true;
-
-    networking.wireguard.enable = true;
-
-    services.logind.settings.Login.HandleLidSwitchExternalPower = "lock";
-    services.logind.settings.Login.HandlePowerKey = "hibernate";
-    services.logind.settings.Login.HandlePowerKeyLongPress = "poweroff";
-    services.power-profiles-daemon.enable = false;
-    services.tlp = {
-        enable = true;
-        settings = {
-            CPU_SCALING_GOVERNOR_ON_AC = "performance";
-            CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-
-            CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
-            CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
-
-            CPU_MIN_PERF_ON_AC = 0;
-            CPU_MAX_PERF_ON_AC = 100;
-            CPU_MIN_PERF_ON_BAT = 0;
-            CPU_MAX_PERF_ON_BAT = 80;
-
-            #Optional helps save long term battery health
-            START_CHARGE_THRESH_BAT0 = 60; # 40 and below it starts to charge
-            STOP_CHARGE_THRESH_BAT0 = 80; # 80 and above it stops charging
-
-        };
-    };
 }
