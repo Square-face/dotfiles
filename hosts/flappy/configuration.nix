@@ -34,7 +34,7 @@
         interfaces.wlp3s0.useDHCP = true;
     };
 
-    system.stateVersion = "25.05"; # No Touch!
+    system.stateVersion = "25.11"; # No Touch!
     hardware.graphics.enable = true;
     hardware.bluetooth.enable = true;
 

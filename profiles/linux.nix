@@ -8,26 +8,12 @@
   options = { };
   config = {
     environment.systemPackages = with pkgs; [
-        xdg-utils
-        uutils-coreutils-noprefix
-        psmisc
-        oversteer
-
-        # Wine
-        wineWowPackages.stable
-        wineWowPackages.waylandFull
-        winetricks
-
-        # Man pages
         man-pages
         man-pages-posix
     ];
 
     documentation.dev.enable = true;
 
-
-    programs.sway.enable = true;
-    services.desktopManager.plasma6.enable = true;
 
     systemd.services.nix-daemon.serviceConfig = {
         CPUWeight=80;
@@ -79,8 +65,8 @@
         "steam-original"
         "steam-unwrapped"
         "steam-run"
-        "spotify"
     ];
+
     security.polkit.enable = true;
     security.pam.services.swaylock = {};
 
