@@ -5,22 +5,19 @@
         ../../modules/default.nix
         ./hardware-configuration.nix
     ];
+    grub.enable = true;
+    boot.kernelPackages = pkgs.linuxPackages_zen;
 
     ssh.enable = true;
     tlp.enable = true;
+    podman.enable = true;
+    libvirtd.enable = true;
     
     audio.enable = true;
     audio.low-latency = false;
 
-    podman.enable = true;
-    libvirtd.enable = true;
-
     sq8.enabled = true;
     ultra.enabled = true;
-
-    grub.enable = true;
-
-    boot.kernelPackages = pkgs.linuxPackages_zen;
 
     hardware.graphics.enable = true;
     hardware.bluetooth.enable = true;
