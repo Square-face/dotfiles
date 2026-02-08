@@ -8,6 +8,7 @@
         ./locale.nix
         ./system.nix
         ./services.nix
-	./users.nix
+        ./users.nix
+        ./printing.nix
     ];
 }

@@ -5,6 +5,7 @@
         ../../modules/default.nix
         ./hardware-configuration.nix
     ];
+
     grub.enable = true;
     boot.kernelPackages = pkgs.linuxPackages_zen;
 
@@ -18,6 +19,8 @@
 
     sq8.enabled = true;
     ultra.enabled = true;
+
+    scanning.enable = true;
 
     hardware.graphics.enable = true;
     hardware.bluetooth.enable = true;
