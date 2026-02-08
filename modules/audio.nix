@@ -48,5 +48,5 @@
           };
         };
     };
-    in lib.recursiveUpdate pipewire low-latency;
+    in lib.mkMerge [pipewire low-latency];
 }
